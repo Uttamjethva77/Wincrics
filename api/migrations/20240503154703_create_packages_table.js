@@ -1,3 +1,4 @@
+const pool = require('../db/db');
 /**
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }

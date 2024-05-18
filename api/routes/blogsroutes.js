@@ -7,18 +7,18 @@ const blogsRoute = express.Router();
 blogsRoute.use(logAnalytics);
 
 // Create a new blog
-blogsRoute.post('/', authenticateToken,BlogsController.create);
+blogsRoute.post('/',BlogsController.create);
 
 // Get all blogs
-blogsRoute.get('/', authenticateToken,BlogsController.getAll);
+blogsRoute.get('/',BlogsController.getAll);
 
 // Get a blog by ID
-blogsRoute.get('/:id', authenticateToken,BlogsController.getById);
+blogsRoute.get('/:id',BlogsController.getById);
 
 // Update a blog by ID
-blogsRoute.put('/:id', authenticateToken,BlogsController.update);
+blogsRoute.put('/:id',BlogsController.update);
 
 // Delete a blog by ID
-blogsRoute.delete('/:id',authenticateToken, BlogsController.delete);
+blogsRoute.delete('/:id', BlogsController.delete);
 
 module.exports = blogsRoute;

@@ -5,6 +5,7 @@ import Admin from './pages/adminpages/Admin';
 import Video from './pages/adminpages/Video';
 import Analytics from './pages/adminpages/Analytics';
 import Packages from './pages/adminpages/Packages';
+import Blogs from './pages/adminpages/Blogs';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path='/admin' element={<Video></Video>}></Route>
           <Route path='/admin/analyitics' element={<Analytics></Analytics>}></Route>
           <Route path='/admin/packages' element={<Packages></Packages>}></Route>
+          <Route path='/admin/blogs' element={<Blogs></Blogs>}></Route>
         </Route>
        
       </Routes>

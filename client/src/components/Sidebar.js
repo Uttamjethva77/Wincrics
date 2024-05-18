@@ -7,6 +7,8 @@ import VideoLibraryIcon from '@mui/icons-material/VideoLibrary';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import SportsCricketIcon from '@mui/icons-material/SportsCricket';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import GroupIcon from '@mui/icons-material/Group';
 
 const sidebarItems = [
 
@@ -14,6 +16,8 @@ const sidebarItems = [
   { text: 'Video', icon: <VideoLibraryIcon sx={{fontSize:"30px"}} />, path: '/admin' },
   { text: 'Packages', icon: <HomeIcon sx={{fontSize:"30px"}} />, path: '/admin/packages' },
   { text: 'Blogs', icon: <SportsCricketIcon sx={{fontSize:"30px"}} />, path: '/admin/blogs' },
+  { text: 'Payment', icon: <AttachMoneyIcon sx={{fontSize:"30px"}} />, path: '/admin/payment' },
+  { text: 'Users', icon: <GroupIcon sx={{fontSize:"30px"}} />, path: '/admin/users' },
 
 ];
 

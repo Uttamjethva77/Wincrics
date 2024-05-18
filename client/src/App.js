@@ -6,6 +6,8 @@ import Video from './pages/adminpages/Video';
 import Analytics from './pages/adminpages/Analytics';
 import Packages from './pages/adminpages/Packages';
 import Blogs from './pages/adminpages/Blogs';
+import Payment from './pages/adminpages/Payment';
+import Users from './pages/adminpages/Users';
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
           <Route path='/admin/analyitics' element={<Analytics></Analytics>}></Route>
           <Route path='/admin/packages' element={<Packages></Packages>}></Route>
           <Route path='/admin/blogs' element={<Blogs></Blogs>}></Route>
+          <Route path='/admin/payment' element={<Payment></Payment>}></Route>
+          <Route path='/admin/users' element={<Users></Users>}></Route>
         </Route>
        
       </Routes>

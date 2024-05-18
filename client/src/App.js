@@ -1,20 +1,27 @@
+
 import './App.css';
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes,  } from "react-router-dom";
 import Admin from './pages/adminpages/Admin';
 import Video from './pages/adminpages/Video';
-import Packages from './pages/adminpages/AdminPackages'
+import Analytics from './pages/adminpages/Analytics';
+import Packages from './pages/adminpages/Packages';
 
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/admin" element={<Admin />}>
-            {/* <Route path="/admin" element={<Video />} /> */}
-            <Route path="/admin" element={<Packages />} />
-          </Route>
-        </Routes>
+     
+
+     <BrowserRouter>
+      <Routes>
+        <Route path= '/admin' element={<Admin /> } >
+          <Route path='/admin' element={<Video></Video>}></Route>
+          <Route path='/admin/analyitics' element={<Analytics></Analytics>}></Route>
+          <Route path='/admin/packages' element={<Packages></Packages>}></Route>
+        </Route>
+       
+      </Routes>
       </BrowserRouter>
+
     </div>
   );
 }

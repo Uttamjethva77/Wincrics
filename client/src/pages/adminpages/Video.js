@@ -1,9 +1,5 @@
 import React, { useState, useEffect } from "react";
 import {
-  Card,
-  CardContent,
-  Typography,
-  IconButton,
   CircularProgress,
   Dialog,
   DialogTitle,
@@ -11,12 +7,19 @@ import {
   DialogActions,
   TextField,
   Button,
+  Snackbar,
+  IconButton,
+  Typography,
+  Box,
+  Divider,
 } from "@mui/material";
+import { DataGrid } from "@mui/x-data-grid";
 import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import MuiAlert from "@mui/material/Alert";
 
 // Define a base URL for the API
 const API_URL = "http://localhost:3000/videos";
@@ -25,6 +28,11 @@ const API_URL = "http://localhost:3000/videos";
 const VideoSchema = Yup.object().shape({
   title: Yup.string().required("Title is required"),
   link: Yup.string().required("Link is required"),
+});
+
+// Alert component for Snackbar
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
 function Video() {
@@ -36,6 +44,9 @@ function Video() {
     title: "",
     link: "",
   });
+  const [error, setError] = useState(null);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
 
   useEffect(() => {
     fetchVideos();
@@ -44,11 +55,15 @@ function Video() {
   const fetchVideos = async () => {
     try {
       const response = await fetch(API_URL);
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
       const data = await response.json();
       setVideos(data);
       setLoading(false);
     } catch (error) {
       console.error("Error fetching videos:", error);
+      setError("Error fetching videos.");
       setLoading(false);
     }
   };
@@ -65,12 +80,18 @@ function Video() {
 
   const handleDeleteVideo = async (id) => {
     try {
-      await fetch(`${API_URL}/${id}`, {
+      const response = await fetch(`${API_URL}/${id}`, {
         method: "DELETE",
       });
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
       setVideos(videos.filter((video) => video.id !== id));
+      setSnackbarMessage("Video deleted successfully.");
+      setSnackbarOpen(true);
     } catch (error) {
       console.error("Error deleting video:", error);
+      setError("Error deleting video.");
     }
   };
 
@@ -91,6 +112,9 @@ function Video() {
         },
         body: JSON.stringify(values),
       });
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
       const data = await response.json();
 
       if (values.id) {
@@ -101,75 +125,94 @@ function Video() {
         setVideos([...videos, data]);
       }
       handleDialogClose();
+      setSnackbarMessage(
+        `Video ${values.id ? "updated" : "added"} successfully.`
+      );
+      setSnackbarOpen(true);
     } catch (error) {
       console.error(`Error ${values.id ? "updating" : "adding"} video:`, error);
+      setError(`Error ${values.id ? "updating" : "adding"} video.`);
     } finally {
       setSubmitting(false);
     }
   };
+
+  const columns = [
+    { field: "title", headerName: "Title", width: 300 },
+    { field: "link", headerName: "Link", width: 400 },
+    {
+      field: "actions",
+      headerName: "Actions",
+      width: 150,
+      renderCell: (params) => (
+        <>
+          <IconButton onClick={() => handleEditVideo(params.row)}>
+            <EditIcon />
+          </IconButton>
+          <IconButton onClick={() => handleDeleteVideo(params.row.id)}>
+            <DeleteIcon />
+          </IconButton>
+        </>
+      ),
+    },
+  ];
 
   if (loading) {
     return <CircularProgress />;
   }
 
   return (
-    <>
-      <Button
-        variant="contained"
-        onClick={handleAddVideo}
-        style={{ width: "300px" }}
+    <Box sx={{ padding: 3 }}>
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={6000}
+        onClose={() => setSnackbarOpen(false)}
       >
-        <AddIcon style={{ marginRight: "5px" }} />
-        Add Video
-      </Button>
-      <div
-        style={{
+        <Alert onClose={() => setSnackbarOpen(false)} severity="success">
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
+      {error && (
+        <Snackbar
+          open={true}
+          autoHideDuration={6000}
+          onClose={() => setError(null)}
+        >
+          <Alert onClose={() => setError(null)} severity="error">
+            {error}
+          </Alert>
+        </Snackbar>
+      )}
+      <Box
+        sx={{
+          mb: 2,
           display: "flex",
-          flexDirection: "column",
+          justifyContent: "space-between",
           alignItems: "center",
         }}
       >
-        <div style={{ marginBottom: "20px" }}>
-          {videos.map((video) => (
-            <Card
-              key={video.id}
-              style={{ marginBottom: "10px", width: "300px" }}
-            >
-              <CardContent>
-                <Typography variant="h6" component="div">
-                  {video.title}
-                </Typography>
-                <Typography
-                  variant="body2"
-                  color="textSecondary"
-                  component="div"
-                >
-                  {video.link}
-                </Typography>
-                <IconButton onClick={() => handleEditVideo(video)}>
-                  <EditIcon />
-                </IconButton>
-                <IconButton onClick={() => handleDeleteVideo(video.id)}>
-                  <DeleteIcon />
-                </IconButton>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+        <Typography variant="h6">Video Management</Typography>
+        <Button variant="contained" onClick={handleAddVideo}>
+          <AddIcon style={{ marginRight: 5 }} />
+          Add Video
+        </Button>
+      </Box>
+      <Divider sx={{ mb: 2 }} />
+      <Box sx={{ height: 510, width: "100%" }}>
+        <DataGrid rows={videos} columns={columns} pageSize={5} />
+      </Box>
 
-        {/* Dialog for Adding/Editing Video */}
-        <Dialog open={openDialog} onClose={handleDialogClose}>
-          <DialogTitle>
-            {currentVideo.id ? "Edit Video" : "Add Video"}
-          </DialogTitle>
-          <FormikForm
-            currentVideo={currentVideo}
-            handleDialogSave={handleDialogSave}
-            handleClose={handleDialogClose}
-          />
-        </Dialog>
-      </div>
-    </>
+      <Dialog open={openDialog} onClose={handleDialogClose}>
+        <DialogTitle>
+          {currentVideo.id ? "Edit Video" : "Add Video"}
+        </DialogTitle>
+        <FormikForm
+          currentVideo={currentVideo}
+          handleDialogSave={handleDialogSave}
+          handleClose={handleDialogClose}
+        />
+      </Dialog>
+    </Box>
   );
 }
 

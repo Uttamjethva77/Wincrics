@@ -3,7 +3,6 @@ const { logAnalytics } = require('../middelwear/analytics')
 const AdminController = require('../controller/AdminController');
 const { authenticateToken } = require('../middelwear/authenticate');
 
-
 const adminRoute = express.Router();
 
 // Middleware to log analytics data for all routes

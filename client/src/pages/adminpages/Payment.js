@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
-import { Box, Divider, Button } from '@mui/material';
-import { LocalizationProvider } from '@mui/x-date-pickers';
+import { Box, Divider, Button, TextField } from '@mui/material';
+import { LocalizationProvider, DatePicker } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { format } from 'date-fns';
 
@@ -9,16 +9,28 @@ const Payment = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [tok, settok] = useState("");
 
   useEffect(() => {
-    fetchData(selectedDate);
-  }, [selectedDate]);
+    const token = localStorage.getItem("admintoken");
+    settok(token);
+  }, []);
+
+  useEffect(() => {
+    if (tok) {
+      fetchData(selectedDate);
+    }
+  }, [selectedDate, tok]);
 
   const fetchData = async (date) => {
     setLoading(true);
     try {
       const formattedDate = format(date, 'yyyy-MM-dd');
-      const response = await fetch(`http://localhost:3000/payment`);
+      const response = await fetch(`http://localhost:3000/payment?date=${formattedDate}`, {
+        headers: {
+          'Authorization': `${tok}`
+        }
+      });
       const result = await response.json();
       setData(result);
     } catch (error) {
@@ -51,10 +63,15 @@ const Payment = () => {
   };
 
   return (
-    <Box sx={{ height: '90%', padding: 2}}>
+    <Box sx={{ height: '90%', padding: 2 }}>
       <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', mb: 2 }}>
         <LocalizationProvider dateAdapter={AdapterDateFns}>
-          {/* Your date picker component */}
+          <DatePicker
+            label="Select Date"
+            value={selectedDate}
+            onChange={(newDate) => setSelectedDate(newDate)}
+            renderInput={(params) => <TextField {...params} />}
+          />
         </LocalizationProvider>
       </Box>
       <Divider sx={{ mb: 2 }} />
@@ -66,7 +83,7 @@ const Payment = () => {
         <DataGrid
           rows={data}
           columns={columns}
-          pageSize={10}  // Adjust page size as needed
+          pageSize={10}
           loading={loading}
           checkboxSelection
         />

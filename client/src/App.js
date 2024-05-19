@@ -1,6 +1,5 @@
-
 import './App.css';
-import { BrowserRouter, Route, Routes,  } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Admin from './pages/adminpages/Admin';
 import Video from './pages/adminpages/Video';
 import Analytics from './pages/adminpages/Analytics';
@@ -8,26 +7,28 @@ import Packages from './pages/adminpages/Packages';
 import Blogs from './pages/adminpages/Blogs';
 import Payment from './pages/adminpages/Payment';
 import Users from './pages/adminpages/Users';
+import Login from './pages/adminpages/Login';
+
 
 function App() {
   return (
     <div className="App">
-     
-
-     <BrowserRouter>
-      <Routes>
-        <Route path= '/admin' element={<Admin /> } >
-          <Route path='/admin' element={<Video></Video>}></Route>
-          <Route path='/admin/analyitics' element={<Analytics></Analytics>}></Route>
-          <Route path='/admin/packages' element={<Packages></Packages>}></Route>
-          <Route path='/admin/blogs' element={<Blogs></Blogs>}></Route>
-          <Route path='/admin/payment' element={<Payment></Payment>}></Route>
-          <Route path='/admin/users' element={<Users></Users>}></Route>
-        </Route>
-       
-      </Routes>
+      <BrowserRouter>
+        <Routes>
+          {/* Route for login page */}
+          <Route path="/admin" element={<Login />} />
+          
+          {/* Nested routes under /admin */}
+          <Route path="/admin/*" element={<Admin />}>
+            <Route path="videos" element={<Video />} />
+            <Route path="analytics" element={<Analytics />} />
+            <Route path="packages" element={<Packages />} />
+            <Route path="blogs" element={<Blogs />} />
+            <Route path="payment" element={<Payment />} />
+            <Route path="users" element={<Users />} />
+          </Route>
+        </Routes>
       </BrowserRouter>
-
     </div>
   );
 }

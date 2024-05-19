@@ -7,7 +7,7 @@ const Users = () => {
   const [userData, setUserData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [tok, settok] = useState("");
-  const [showUsers, setShowUsers] = useState(true); // State to manage which section to show
+  const [section, setSection] = useState('users'); // State to manage which section to show
 
   useEffect(() => {
     const token = localStorage.getItem("admintoken");
@@ -15,16 +15,15 @@ const Users = () => {
   }, []);
 
   useEffect(() => {
-    if (tok && showUsers) {
-      fetchData('http://localhost:3000/users');
-    } else if (tok && !showUsers) {
-      fetchData('http://localhost:3000/otp');
+    if (tok) {
+      fetchData();
     }
-  }, [tok, showUsers]);
+  }, [tok, section]);
 
-  const fetchData = async (url) => {
+  const fetchData = async () => {
     setLoading(true);
     try {
+      let url = `http://localhost:3000/${section}`;
       const response = await fetch(url, {
         headers: {
           'Authorization': `${tok}`
@@ -56,20 +55,31 @@ const Users = () => {
     // Add more OTP fields as needed
   ];
 
+  const columnsNotifications = [
+    { field: 'id', headerName: 'ID', width: 100 },
+    { field: 'email', headerName: 'Email', width: 200 },
+    { field: 'whatsapp_number', headerName: 'WhatsApp Number', width: 200 },
+    { field: 'name', headerName: 'Name', width: 200 },
+    // Add more notification fields as needed
+  ];
+
   const exportToCSV = () => {
     const currentDate = format(new Date(), 'yyyyMMdd');
     let fileName = '';
-  
-    if (showUsers) {
+
+    if (section === 'users') {
       fileName = `users_${currentDate}.csv`;
-    } else {
+    } else if (section === 'otp') {
       fileName = `otp_${currentDate}.csv`;
+    } else if (section === 'notification') {
+      fileName = `notification_${currentDate}.csv`;
     }
-  
+
+    const columns = section === 'users' ? columnsUsers : (section === 'notification' ? columnsNotifications : columnsOTP);
     const csvContent = "data:text/csv;charset=utf-8," 
-      + (showUsers ? columnsUsers : columnsOTP).map(column => column.headerName).join(",") + "\n"
-      + userData.map(row => (showUsers ? columnsUsers : columnsOTP).map(column => row[column.field]).join(",")).join("\n");
-  
+      + columns.map(column => column.headerName).join(",") + "\n"
+      + userData.map(row => columns.map(column => row[column.field]).join(",")).join("\n");
+
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement("a");
     link.setAttribute("href", encodedUri);
@@ -82,8 +92,9 @@ const Users = () => {
     <Box sx={{ height: '90%', padding: 2 }}>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <Box>
-          <Button variant="contained" onClick={() => setShowUsers(true)} sx={{ mr: 2 }}>Users</Button>
-          <Button variant="contained" onClick={() => setShowUsers(false)}>OTP</Button>
+          <Button variant="contained" onClick={() => setSection('users')} sx={{ mr: 2 }}>Users</Button>
+          <Button variant="contained" onClick={() => setSection('otp')} sx={{ mr: 2 }}>OTP</Button>
+          <Button variant="contained" onClick={() => setSection('notification')}>Notification</Button>
         </Box>
         <Button variant="contained" onClick={exportToCSV} sx={{ ml: 2 }}>Export CSV</Button>
       </Box>
@@ -91,7 +102,7 @@ const Users = () => {
       <Box sx={{ height: 500, width: '100%', mt: 2 }}>
         <DataGrid
           rows={userData}
-          columns={showUsers ? columnsUsers : columnsOTP}
+          columns={section === 'users' ? columnsUsers : (section === 'notification' ? columnsNotifications : columnsOTP)}
           pageSize={10}
           loading={loading}
           checkboxSelection

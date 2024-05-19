@@ -7,6 +7,6 @@ const analyticsRoute = express.Router();
 analyticsRoute.use(logAnalytics);
 
 // Get all analytics data
-analyticsRoute.get('/', authenticateToken,AnalyticsController.getAll);
+analyticsRoute.get('/',AnalyticsController.getAll);
 
 module.exports = analyticsRoute;

@@ -8,18 +8,18 @@ const paymentRoute = express.Router();
 paymentRoute.use(logAnalytics);
 
 // Create a new payment
-paymentRoute.post('/', authenticateToken,PaymentController.create);
+paymentRoute.post('/',PaymentController.create);
 
 // Get all payments
-paymentRoute.get('/', authenticateToken,PaymentController.getAll);
+paymentRoute.get('/',PaymentController.getAll);
 
 // Get a payment by ID
-paymentRoute.get('/:id', authenticateToken,PaymentController.getById);
+paymentRoute.get('/:id',PaymentController.getById);
 
 // Update a payment by ID
-paymentRoute.put('/:id', authenticateToken,PaymentController.update);
+paymentRoute.put('/:id',PaymentController.update);
 
 // Delete a payment by ID
-paymentRoute.delete('/:id', authenticateToken,PaymentController.delete);
+paymentRoute.delete('/:id',PaymentController.delete);
 
 module.exports = paymentRoute;

@@ -13,7 +13,7 @@ class Payment {
   }
 
   static async getAll() {
-    const query = 'SELECT * FROM payments';
+    const query = 'SELECT * FROM payments ORDER BY id DESC';
     const result = await pool.query(query);
     return result.rows;
   }

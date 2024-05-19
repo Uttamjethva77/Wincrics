@@ -8,6 +8,7 @@ import Blogs from './pages/adminpages/Blogs';
 import Payment from './pages/adminpages/Payment';
 import Users from './pages/adminpages/Users';
 import Login from './pages/adminpages/Login';
+import AdminUsers from './pages/adminpages/AdminUsers';
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
             <Route path="blogs" element={<Blogs />} />
             <Route path="payment" element={<Payment />} />
             <Route path="users" element={<Users />} />
+            <Route path="adminusers" element={<AdminUsers />} />
           </Route>
         </Routes>
       </BrowserRouter>

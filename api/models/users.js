@@ -23,7 +23,7 @@ class User {
     }
 
   static async getAll() {
-    const query = 'SELECT * FROM users';
+    const query = 'SELECT * FROM users ORDER BY id DESC';
     const result = await pool.query(query);
     return result.rows;
   }

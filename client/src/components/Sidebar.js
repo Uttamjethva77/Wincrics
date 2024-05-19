@@ -9,6 +9,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import SportsCricketIcon from '@mui/icons-material/SportsCricket';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import GroupIcon from '@mui/icons-material/Group';
+import CollectionsIcon from '@mui/icons-material/Collections';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 
 const sidebarItems = [
@@ -19,6 +20,7 @@ const sidebarItems = [
   { text: 'Payment', icon: <AttachMoneyIcon sx={{ fontSize: "30px" }} />, path: '/admin/payment' },
   { text: 'Users', icon: <GroupIcon sx={{ fontSize: "30px" }} />, path: '/admin/users' },
   { text: 'AdminUsers', icon: <AdminPanelSettingsIcon sx={{ fontSize: "30px" }} />, path: '/admin/adminusers' },
+  { text: 'Winnings', icon: <CollectionsIcon sx={{ fontSize: "30px" }} />, path: '/admin/winnings' },
 ];
 
 const Sidebar = () => {

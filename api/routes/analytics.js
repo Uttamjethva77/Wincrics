@@ -5,6 +5,7 @@ const { authenticateToken } = require('../middelwear/authenticate');
 
 const analyticsRoute = express.Router();
 analyticsRoute.use(logAnalytics);
+analyticsRoute.use(authenticateToken);
 
 // Get all analytics data
 analyticsRoute.get('/',AnalyticsController.getAll);

@@ -5,7 +5,7 @@ const { authenticateToken } = require('../middelwear/authenticate');
 const blogsRoute = express.Router();
 // Middleware to log analytics data for all routes
 blogsRoute.use(logAnalytics);
-// blogsRoute.use(authenticateToken);
+blogsRoute.use(authenticateToken);
 // Create a new blog
 blogsRoute.post('/',BlogsController.create);
 

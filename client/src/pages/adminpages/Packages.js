@@ -44,10 +44,6 @@ function Packages() {
         time: "",
     });
 
-    const [tok, settok] = useState("");
-
-
-
     useEffect(() => {
         fetchPackages();
     }, []);

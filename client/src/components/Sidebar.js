@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Drawer, List, ListItem, ListItemIcon, ListItemText, Tooltip, IconButton } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import HomeIcon from '@mui/icons-material/Home';
 import InfoIcon from '@mui/icons-material/Info';
 import VideoLibraryIcon from '@mui/icons-material/VideoLibrary';
@@ -11,18 +11,17 @@ import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import GroupIcon from '@mui/icons-material/Group';
 
 const sidebarItems = [
-
-  { text: 'analyitics', icon: <InfoIcon sx={{fontSize:"30px"}}/>, path: '/admin/analyitics' },
-  { text: 'Video', icon: <VideoLibraryIcon sx={{fontSize:"30px"}} />, path: '/admin' },
-  { text: 'Packages', icon: <HomeIcon sx={{fontSize:"30px"}} />, path: '/admin/packages' },
-  { text: 'Blogs', icon: <SportsCricketIcon sx={{fontSize:"30px"}} />, path: '/admin/blogs' },
-  { text: 'Payment', icon: <AttachMoneyIcon sx={{fontSize:"30px"}} />, path: '/admin/payment' },
-  { text: 'Users', icon: <GroupIcon sx={{fontSize:"30px"}} />, path: '/admin/users' },
-
+  { text: 'analyitics', icon: <InfoIcon sx={{ fontSize: "30px" }} />, path: '/admin/analytics' },
+  { text: 'Video', icon: <VideoLibraryIcon sx={{ fontSize: "30px" }} />, path: '/admin/videos' },
+  { text: 'Packages', icon: <HomeIcon sx={{ fontSize: "30px" }} />, path: '/admin/packages' },
+  { text: 'Blogs', icon: <SportsCricketIcon sx={{ fontSize: "30px" }} />, path: '/admin/blogs' },
+  { text: 'Payment', icon: <AttachMoneyIcon sx={{ fontSize: "30px" }} />, path: '/admin/payment' },
+  { text: 'Users', icon: <GroupIcon sx={{ fontSize: "30px" }} />, path: '/admin/users' },
 ];
 
 const Sidebar = () => {
   const [open, setOpen] = useState(true);
+  const location = useLocation();  // Get the current path
 
   const handleDrawerToggle = () => {
     setOpen(!open);
@@ -37,7 +36,7 @@ const Sidebar = () => {
         '& .MuiDrawer-paper': {
           width: open ? 240 : 60,
           boxSizing: 'border-box',
-          overflowX: 'hidden', 
+          overflowX: 'hidden',
         },
       }}
     >
@@ -51,7 +50,16 @@ const Sidebar = () => {
 
         {sidebarItems.map((item, index) => (
           <Tooltip title={item.text} placement="right" key={index}>
-            <ListItem button component={Link} to={item.path}>
+            <ListItem 
+              button 
+              component={Link} 
+              to={item.path} 
+              sx={{
+                backgroundColor: location.pathname === item.path ? '#03fcb6 !important' : '',
+                transition: 'background-color 0.3s ease',
+
+              }}
+            >
               <ListItemIcon>{item.icon}</ListItemIcon>
               {open ? <ListItemText primary={item.text} /> : null}
             </ListItem>

@@ -6,15 +6,27 @@ import { format } from 'date-fns';
 const Users = () => {
   const [userData, setUserData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [tok, settok] = useState("");
 
   useEffect(() => {
-    fetchData();
+    const token = localStorage.getItem("admintoken");
+    settok(token);
   }, []);
+
+  useEffect(() => {
+    if (tok) {
+      fetchData();
+    }
+  }, [tok]);
 
   const fetchData = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`http://localhost:3000/users`);
+      const response = await fetch('http://localhost:3000/users', {
+        headers: {
+          'Authorization': `${tok}`
+        }
+      });
       const result = await response.json();
       setUserData(result);
     } catch (error) {
@@ -49,7 +61,7 @@ const Users = () => {
   };
 
   return (
-    <Box sx={{ height: '90%', padding: 2}}>
+    <Box sx={{ height: '90%', padding: 2 }}>
       <Divider sx={{ mb: 2 }} />
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <Box />

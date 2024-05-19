@@ -50,7 +50,14 @@ function Packages() {
 
     const fetchPackages = async () => {
         try {
-            const response = await fetch(API_URL);
+            const token = localStorage.getItem("admintoken");
+
+            const response = await fetch(API_URL, {
+                headers: {
+                  'Authorization': token,
+                },
+              });
+
             if (!response.ok) throw new Error("Failed to fetch packages");
             const data = await response.json();
             setPackages(data);
@@ -74,8 +81,12 @@ function Packages() {
 
     const handleDeletePackage = async (id) => {
         try {
+            const token = localStorage.getItem("admintoken")
             const response = await fetch(`${API_URL}/${id}`, {
                 method: "DELETE",
+                headers: {
+                    'Authorization': `${token}`
+                  }
             });
             if (!response.ok) throw new Error("Failed to delete package");
             setPackages(packages.filter((pack) => pack.id !== id));
@@ -96,10 +107,12 @@ function Packages() {
         const url = values.id ? `${API_URL}/${values.id}` : API_URL;
 
         try {
+            const token = localStorage.getItem("admintoken")
             const response = await fetch(url, {
                 method,
                 headers: {
                     "Content-Type": "application/json",
+                    'Authorization': `${token}`
                 },
                 body: JSON.stringify(values),
             });

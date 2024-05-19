@@ -9,16 +9,28 @@ const Analytics = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [tok, settok] = useState("");
 
   useEffect(() => {
-    fetchData(selectedDate);
-  }, [selectedDate]);
+    const token = localStorage.getItem("admintoken");
+    settok(token);
+  }, []);
+
+  useEffect(() => {
+    if (tok) {
+      fetchData(selectedDate);
+    }
+  }, [selectedDate, tok]);
 
   const fetchData = async (date) => {
     setLoading(true);
     try {
       const formattedDate = format(date, 'MM/dd/yyyy');
-      const response = await fetch(`http://localhost:3000/analytics?page=1&filters[date]=${formattedDate}`);
+      const response = await fetch(`http://localhost:3000/analytics?page=1&filters[date]=${formattedDate}`, {
+        headers: {
+          'Authorization': `${tok}`
+        }
+      });
       const result = await response.json();
       const filteredData = result.map((item, index) => ({
         id: index + 1,  
@@ -45,7 +57,7 @@ const Analytics = () => {
   ];
 
   return (
-    <Box sx={{ height: '90%', padding: 2}}>
+    <Box sx={{ height: '90%', padding: 2 }}>
       <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', mb: 2 }}>
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <DatePicker
@@ -61,7 +73,7 @@ const Analytics = () => {
         <DataGrid
           rows={data}
           columns={columns}
-          pageSize={1}
+          pageSize={10}
           loading={loading}
           checkboxSelection
         />

@@ -17,6 +17,8 @@ const otpRoute = require('./routes/otproute')
 const otpemail = require('./routes/otpemail')
 const userLog = require('./routes/userlogin')
 const blogdataRoute = require('./routes/blogsdata') 
+const forgot = require('./routes/forgotpassword') 
+const updatepassword = require('./routes/updatepassword') 
 
 app.use(cors());
 app.use(express.json());
@@ -27,6 +29,8 @@ app.use('/winnings', winningRoute);
 app.use('/blogs', blogsRoute);
 app.use('/admin', adminroute);
 app.use('/blogdata', blogdataRoute); 
+app.use('/forgotpassword', forgot); 
+app.use('/updatepassword', updatepassword);
 app.use('/notification', notificationRoute)
 app.use('/payment', paymentroute)
 app.use('/analytics', analyticsRoute);

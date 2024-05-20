@@ -26,7 +26,7 @@ async function userLogin(req, res) {
       }
     // Generate JWTUSER token
 
-    res.status(200).json({ message: 'Login Successfull' });
+    res.status(200).json({ user });
   } catch (error) {
     console.error('Login error:', error);
     res.status(500).json({ message: 'Internal server error' });

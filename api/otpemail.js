@@ -87,7 +87,7 @@ class Otpemail {
     <div class="container">
         <div class="header">
             <h1>Wincrics</h1>
-            <p>Your go-to platform for all things cricket!</p>
+            <p>Your platform for cricket!</p>
         </div>
         <div class="card">
             <p class="otp">Your OTP is: <strong>${otp}</strong></p>
@@ -95,9 +95,7 @@ class Otpemail {
             <p class="paragraph">Please do not share this OTP with anyone for security reasons.</p>
         </div>
         <p class="paragraph">If you didn't request this OTP, you can ignore this email.</p>
-        <p class="paragraph">Need help? <a href="#">Contact support</a></p>
-        <p class="paragraph">Follow us on <a href="#">Facebook</a> and <a href="#">Twitter</a></p>
-    </div>
+        </div>
 </body>
 </html>
 

@@ -6,7 +6,7 @@ const { logAnalytics } = require('../middelwear/analytics');
 const videoRoute = express.Router();
 
 videoRoute.use(logAnalytics);
-videoRoute.use(authenticateToken);
+// videoRoute.use(authenticateToken);
 // Create a new video
 videoRoute.post('/' ,VideoController.create);
 

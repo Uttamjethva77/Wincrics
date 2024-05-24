@@ -86,7 +86,13 @@ function Blogs() {
 
   const fetchBlogs = async () => {
     try {
-      const response = await fetch(API_URL);
+      const token = localStorage.getItem("admintoken");
+
+            const response = await fetch(API_URL, {
+                headers: {
+                  'Authorization': token,
+                },
+              });
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
@@ -133,8 +139,12 @@ function Blogs() {
 
   const handleDeleteBlog = async (id) => {
     try {
+      const token = localStorage.getItem("admintoken")
       const response = await fetch(`${API_URL}/${id}`, {
         method: "DELETE",
+        headers: {
+          'Authorization': `${token}`
+        }
       });
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -179,10 +189,12 @@ function Blogs() {
     const url = values.id ? `${API_URL}/${values.id}` : API_URL;
 
     try {
+      const token = localStorage.getItem("admintoken")
       const response = await fetch(url, {
         method,
         headers: {
           "Content-Type": "application/json",
+          'Authorization': `${token}`
         },
         body: JSON.stringify(values),
       });

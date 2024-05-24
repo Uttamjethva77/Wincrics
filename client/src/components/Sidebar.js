@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Drawer, List, ListItem, ListItemIcon, ListItemText, Tooltip, IconButton } from '@mui/material';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import HomeIcon from '@mui/icons-material/Home';
 import InfoIcon from '@mui/icons-material/Info';
 import VideoLibraryIcon from '@mui/icons-material/VideoLibrary';
@@ -11,6 +11,7 @@ import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import GroupIcon from '@mui/icons-material/Group';
 import CollectionsIcon from '@mui/icons-material/Collections';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 
 const sidebarItems = [
   { text: 'analyitics', icon: <InfoIcon sx={{ fontSize: "30px" }} />, path: '/admin/analytics' },
@@ -26,9 +27,14 @@ const sidebarItems = [
 const Sidebar = () => {
   const [open, setOpen] = useState(true);
   const location = useLocation();  // Get the current path
+  const navigate = useNavigate();
 
   const handleDrawerToggle = () => {
     setOpen(!open);
+  };
+  const handleLogout = () => {
+    localStorage.removeItem('admintoken');
+    navigate('/admin/login');
   };
 
   return (
@@ -69,6 +75,17 @@ const Sidebar = () => {
             </ListItem>
           </Tooltip>
         ))}
+        <Tooltip title="Logout" placement="right">
+          <ListItem 
+            button 
+            onClick={handleLogout}
+          >
+            <ListItemIcon>
+              <ExitToAppIcon />
+            </ListItemIcon>
+            {open ? <ListItemText primary="Logout" /> : null}
+          </ListItem>
+        </Tooltip>
       </List>
     </Drawer>
   );

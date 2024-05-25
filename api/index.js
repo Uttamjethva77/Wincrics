@@ -19,6 +19,7 @@ const userLog = require('./routes/userlogin')
 const blogdataRoute = require('./routes/blogsdata') 
 const forgot = require('./routes/forgotpassword') 
 const updatepassword = require('./routes/updatepassword') 
+const contactUsRoute = require('./routes/contactus')
 
 app.use(cors());
 app.use(express.json());
@@ -38,6 +39,7 @@ app.use('/otp', otpRoute);
 app.use('/otpemail', otpemail);
 app.use('/packagess', packagesRoute)
 app.use('/videos', videoroute);
+app.use('/contactus', contactUsRoute);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

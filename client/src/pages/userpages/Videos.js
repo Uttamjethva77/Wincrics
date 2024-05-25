@@ -32,40 +32,44 @@ const Videos = () => {
     fetchVideos();
   }, []);
 
+  const getAutoplayLink = (link) => {
+    let autoplayLink = link;
+    if (link.includes("youtube.com/watch")) {
+      const videoId = new URL(link).searchParams.get("v");
+      autoplayLink = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+    } else if (link.includes("youtube.com/embed")) {
+      autoplayLink = `${link}?autoplay=1`;
+    }
+    return autoplayLink;
+  };
+
   if (loading) {
-    return <CircularProgress />;
+    return (
+      <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
+        <CircularProgress />
+      </Box>
+    );
   }
 
   return (
     <Container sx={{ mt: 4 }}>
-      <Grid container spacing={4} sx={{ mt: 15 }}>
-        {videos.map((video) => {
-          // Modify the video link to include autoplay if necessary
-          const autoplayLink = video.link.includes("youtube")
-            ? `${video.link}?autoplay=1`
-            : video.link;
-
-          return (
-            <Grid item xs={12} sm={6} md={4} key={video.link}>
-              <Card>
-                <Box
-                  component="iframe"
-                  height="240"
-                  src={autoplayLink}
-                  title={video.title}
-                  allow="autoplay; encrypted-media"
-                  frameBorder="0"
-                  allowFullScreen
-                ></Box>
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
-                    {video.title}
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-          );
-        })}
+      <Grid container spacing={4} sx={{ mt: 10 }}>
+        {videos.map((video) => (
+          <Grid item xs={12} sm={6} md={4} key={video.link}>
+            <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+              <Box
+                component="iframe"
+                height="240"
+                src={getAutoplayLink(video.link)}
+                title={video.title}
+                allow="autoplay; encrypted-media"
+                allowFullScreen
+                sx={{ }}
+              />
+             <Typography sx={{py:1}}>{video.title}</Typography>
+            </Card>
+          </Grid>
+        ))}
       </Grid>
     </Container>
   );

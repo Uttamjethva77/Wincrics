@@ -38,11 +38,11 @@ function App() {
 
           <Route path="/register" element={<Register></Register>}></Route>
           <Route path="login" element={<Loginuser></Loginuser>}></Route>
-          <Route path="/home" element={<ResponsiveAppBar></ResponsiveAppBar>}>
-            <Route path="/home/videos" element={<Videos></Videos>}></Route>
-            <Route path="/home/blog" element={<h1>blog</h1>}></Route>
-            <Route path="/home/winnings" element={<h1>winnings</h1>}></Route>
-            <Route path="/home/packages" element={<Userpackages></Userpackages>}></Route>
+          <Route path="/" element={<ResponsiveAppBar></ResponsiveAppBar>}>
+            <Route path="/videos" element={<Videos></Videos>}></Route>
+            <Route path="/blog" element={<div><h1>blog</h1></div>}></Route>
+            <Route path="/winnings" element={<h1>winnings</h1>}></Route>
+            <Route path="/packages" element={<Userpackages></Userpackages>}></Route>
           </Route>
         </Routes>
       </BrowserRouter>

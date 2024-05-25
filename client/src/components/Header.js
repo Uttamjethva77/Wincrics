@@ -34,6 +34,8 @@ const Header = () => {
   const navigate = useNavigate();
   const [data, setdata] = useState();
 
+  const [logout,setlogout] = useState()
+
   const menuItems = [
     //   { text: "Home", icon: <HomeIcon />, route: "/home" },
     { text: "packages", icon: <PriceCheckIcon />, route: "/packages" },
@@ -48,7 +50,7 @@ const Header = () => {
     const userdata = localStorage.getItem("userdata");
     console.log(JSON.parse(userdata));
     setdata(JSON.parse(userdata));
-  }, [data]);
+  }, [logout]);
 
   const toggleDrawer = (open) => (event) => {
     if (
@@ -216,6 +218,7 @@ const Header = () => {
                     localStorage.clear("userdata");
                     navigate("/");
                     setAnchorEl(null);
+                    setlogout(null)
                   }}
                 >
                   Logout

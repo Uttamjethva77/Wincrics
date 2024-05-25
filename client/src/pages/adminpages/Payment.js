@@ -9,14 +9,13 @@ const Payment = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const [tok, settok] = useState("");
+  const [tok, setTok] = useState("");
   const [openDialog, setOpenDialog] = useState(false);
-  const [formData, setFormData] = useState({ id: null, user_id: '', money: '', payment_at: new Date() });
-  const [editMode, setEditMode] = useState(false);
+  const [formData, setFormData] = useState({ user_id: '', money: '', payment_at: null });
 
   useEffect(() => {
     const token = localStorage.getItem("admintoken");
-    settok(token);
+    setTok(token);
   }, []);
 
   useEffect(() => {
@@ -49,8 +48,7 @@ const Payment = () => {
 
   const handleCloseDialog = () => {
     setOpenDialog(false);
-    setFormData({ id: null, user_id: '', money: '', payment_at: new Date() });
-    setEditMode(false);
+    setFormData({ user_id: '', money: '', payment_at: null });
   };
 
   const handleFormChange = (e) => {
@@ -63,6 +61,11 @@ const Payment = () => {
   };
 
   const handleCreatePayment = async () => {
+    if (!formData.payment_at) {
+      console.error('Payment date is required');
+      return;
+    }
+  
     try {
       const response = await fetch(`http://localhost:3000/payment`, {
         method: 'POST',
@@ -82,8 +85,13 @@ const Payment = () => {
       console.error('Error creating payment:', error);
     }
   };
-
+  
   const handleEditPayment = async () => {
+    if (!formData.payment_at) {
+      console.error('Payment date is required');
+      return;
+    }
+  
     try {
       const response = await fetch(`http://localhost:3000/payment/${formData.id}`, {
         method: 'PUT',
@@ -122,12 +130,6 @@ const Payment = () => {
     }
   };
 
-  const handleEditButtonClick = (rowData) => {
-    setFormData({ id: rowData.id, user_id: rowData.user_id, money: rowData.money, payment_at: new Date(rowData.payment_at) });
-    setEditMode(true);
-    setOpenDialog(true);
-  };
-
   const columns = [
     { field: 'user_id', headerName: 'User ID', width: 100 },
     { field: 'money', headerName: 'Amount', width: 150 },
@@ -137,7 +139,10 @@ const Payment = () => {
       headerName: 'Actions',
       width: 150,
       renderCell: (params) => (
-        <Button onClick={() => handleEditButtonClick(params.row)}>Edit</Button>
+        <>
+          <Button variant="outlined" onClick={() => handleEditPayment(params.row)}>Edit</Button>
+          <Button variant="outlined" onClick={() => handleDeletePayment(params.row.id)}>Delete</Button>
+        </>
       ),
     },
   ];
@@ -169,7 +174,7 @@ const Payment = () => {
         />
       </Box>
       <Dialog open={openDialog} onClose={handleCloseDialog}>
-        <DialogTitle>{editMode ? 'Edit Payment' : 'Add Payment'}</DialogTitle>
+        <DialogTitle>Add Payment</DialogTitle>
         <DialogContent>
           <TextField
             fullWidth
@@ -202,11 +207,9 @@ const Payment = () => {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseDialog}>Cancel</Button>
-          {editMode ? (
-            <Button onClick={handleEditPayment} color="primary">Save</Button>
-          ) : (
-            <Button onClick={handleCreatePayment} color="primary">Create</Button>
-          )}
+          <Button onClick={formData.id ? handleEditPayment : handleCreatePayment} color="primary">
+            {formData.id ? 'Edit Payment' : 'Create Payment'}
+          </Button>
         </DialogActions>
       </Dialog>
     </Box>

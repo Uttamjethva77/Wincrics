@@ -6,7 +6,7 @@ const paymentRoute = express.Router();
 
 
 paymentRoute.use(logAnalytics);
-paymentRoute.use(authenticateToken);
+// paymentRoute.use(authenticateToken);
 
 // Create a new payment
 paymentRoute.post('/',PaymentController.create);

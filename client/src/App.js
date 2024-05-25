@@ -15,13 +15,6 @@ import Loginuser from "./pages/userpages/Login";
 import ResponsiveAppBar from "./pages/userpages/Home";
 import Videos from "./pages/userpages/Videos";
 import Userpackages from "./pages/userpages/Packages";
-import Winningsuser from "./pages/userpages/Winnings";
-import Profile from "./pages/userpages/Profile";
-import Terms from "./pages/userpages/Terms";
-import Policy from "./pages/userpages/Policy";
-import About from "./pages/userpages/About";
-import Contact from "./pages/userpages/Contact";
-import Billing from "./pages/userpages/Billing";
 
 function App() {
   return (
@@ -41,6 +34,7 @@ function App() {
             <Route path="users" element={<Users />} />
             <Route path="adminusers" element={<AdminUsers />} />
             <Route path="winnings" element={<Winnings />} />
+            <Route path="contactus" element={<ContactUs />} />
           </Route>
 
           <Route path="/register" element={<Register></Register>}></Route>

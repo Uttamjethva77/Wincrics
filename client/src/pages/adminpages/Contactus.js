@@ -5,114 +5,123 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
+  TextField,
   Button,
   Snackbar,
+  IconButton,
   Typography,
   Box,
   Divider,
-  TextField,
-  IconButton,
 } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
+import AddIcon from "@mui/icons-material/Add";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import MuiAlert from "@mui/material/Alert";
-import { Edit as EditIcon, Delete as DeleteIcon, Add as AddIcon } from '@mui/icons-material';
 
-const API_URL = "http://localhost:3000/payment";
+// Define a base URL for the API
+const API_URL = "http://localhost:3000/contactus";
 
-const PaymentSchema = Yup.object().shape({
-  user_id: Yup.number().required("User ID is required"),
-  money: Yup.number().required("Amount is required"),
-  payment_at: Yup.date().required("Payment Date is required"),
+// Validation schema for the contactus form
+const ContactUsSchema = Yup.object().shape({
+  full_name: Yup.string().required("Full Name is required"),
+  email: Yup.string().email("Invalid email").required("Email is required"),
+  phone_number: Yup.string().required("Phone Number is required"),
+  message: Yup.string().max(1000, "Message must be at most 1000 characters"),
 });
 
+// Alert component for Snackbar
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-function Payment() {
-  const [payments, setPayments] = useState([]);
+function ContactUs() {
+  const [contactUsItems, setContactUsItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [openDialog, setOpenDialog] = useState(false);
-  const [currentPayment, setCurrentPayment] = useState({
+  const [currentContactUs, setCurrentContactUs] = useState({
     id: null,
-    user_id: "",
-    money: "",
-    payment_at: "",
+    full_name: "",
+    email: "",
+    phone_number: "",
+    message: "",
   });
   const [error, setError] = useState(null);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
 
   useEffect(() => {
-    fetchPayments();
+    fetchContactUsItems();
   }, []);
 
-  const fetchPayments = async () => {
+  const fetchContactUsItems = async () => {
     try {
       const token = localStorage.getItem("admintoken");
       const response = await fetch(API_URL, {
         headers: {
-          'Authorization': token,
+          Authorization: token,
         },
       });
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
       const data = await response.json();
-      setPayments(data);
+      setContactUsItems(data);
       setLoading(false);
     } catch (error) {
-      console.error("Error fetching payments:", error);
-      setError("Error fetching payments.");
+      console.error("Error fetching contact us items:", error);
+      setError("Error fetching contact us items.");
       setLoading(false);
     }
   };
 
-  const handleAddPayment = () => {
-    setCurrentPayment({
+  const handleAddContactUs = () => {
+    setCurrentContactUs({
       id: null,
-      user_id: "",
-      money: "",
-      payment_at: "",
+      full_name: "",
+      email: "",
+      phone_number: "",
+      message: "",
     });
     setOpenDialog(true);
   };
 
-  const handleEditPayment = (payment) => {
-    setCurrentPayment(payment);
+  const handleEditContactUs = (contactUsItem) => {
+    setCurrentContactUs(contactUsItem);
     setOpenDialog(true);
   };
 
-  const handleDeletePayment = async (id) => {
+  const handleDeleteContactUs = async (id) => {
     try {
       const token = localStorage.getItem("admintoken");
       const response = await fetch(`${API_URL}/${id}`, {
         method: "DELETE",
         headers: {
-          'Authorization': `${token}`
-        }
+          Authorization: token,
+        },
       });
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
-      setPayments(payments.filter((payment) => payment.id !== id));
-      setSnackbarMessage("Payment deleted successfully.");
+      setContactUsItems(contactUsItems.filter((item) => item.id !== id));
+      setSnackbarMessage("Contact Us item deleted successfully.");
       setSnackbarOpen(true);
     } catch (error) {
-      console.error("Error deleting payment:", error);
-      setError("Error deleting payment.");
+      console.error("Error deleting contact us item:", error);
+      setError("Error deleting contact us item.");
     }
   };
 
   const handleDialogClose = () => {
     setOpenDialog(false);
-    setCurrentPayment({
+    setCurrentContactUs({
       id: null,
-      user_id: "",
-      money: "",
-      payment_at: "",
+      full_name: "",
+      email: "",
+      phone_number: "",
+      message: "",
     });
   };
 
@@ -126,12 +135,9 @@ function Payment() {
         method,
         headers: {
           "Content-Type": "application/json",
-          'Authorization': `${token}`
+          Authorization: token,
         },
-        body: JSON.stringify({
-          ...values,
-          paymentAt: values.payment_at // Send paymentAt instead of payment_at
-        }),
+        body: JSON.stringify(values),
       });
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -139,39 +145,43 @@ function Payment() {
       const data = await response.json();
 
       if (values.id) {
-        setPayments(
-          payments.map((payment) => (payment.id === values.id ? data : payment))
+        setContactUsItems(
+          contactUsItems.map((item) => (item.id === values.id ? data : item))
         );
       } else {
-        setPayments([...payments, data]);
+        setContactUsItems([...contactUsItems, data]);
       }
       handleDialogClose();
       setSnackbarMessage(
-        `Payment ${values.id ? "updated" : "added"} successfully.`
+        `Contact Us item ${values.id ? "updated" : "added"} successfully.`
       );
       setSnackbarOpen(true);
     } catch (error) {
-      console.error(`Error ${values.id ? "updating" : "adding"} payment:`, error);
-      setError(`Error ${values.id ? "updating" : "adding"} payment.`);
+      console.error(
+        `Error ${values.id ? "updating" : "adding"} contact us item:`,
+        error
+      );
+      setError(`Error ${values.id ? "updating" : "adding"} contact us item.`);
     } finally {
       setSubmitting(false);
     }
   };
 
   const columns = [
-    { field: "user_id", headerName: "User ID", width: 150 },
-    { field: "money", headerName: "Amount", width: 150 },
-    { field: "payment_at", headerName: "Payment Date", width: 200 },
+    { field: "full_name", headerName: "Full Name", width: 200 },
+    { field: "email", headerName: "Email", width: 200 },
+    { field: "phone_number", headerName: "Phone Number", width: 150 },
+    { field: "message", headerName: "Message", width: 400 },
     {
       field: "actions",
       headerName: "Actions",
       width: 150,
       renderCell: (params) => (
         <>
-          <IconButton onClick={() => handleEditPayment(params.row)}>
+          <IconButton onClick={() => handleEditContactUs(params.row)}>
             <EditIcon />
           </IconButton>
-          <IconButton onClick={() => handleDeletePayment(params.row.id)}>
+          <IconButton onClick={() => handleDeleteContactUs(params.row.id)}>
             <DeleteIcon />
           </IconButton>
         </>
@@ -213,23 +223,23 @@ function Payment() {
           alignItems: "center",
         }}
       >
-        <Typography variant="h6">Payment Management</Typography>
-        <Button variant="contained" onClick={handleAddPayment}>
+        <Typography variant="h6">Contact Us Management</Typography>
+        <Button variant="contained" onClick={handleAddContactUs}>
           <AddIcon style={{ marginRight: 5 }} />
-          Add Payment
+          Add Contact Us Item
         </Button>
       </Box>
       <Divider sx={{ mb: 2 }} />
       <Box sx={{ height: 510, width: "100%" }}>
-        <DataGrid rows={payments} columns={columns} pageSize={5} />
+        <DataGrid rows={contactUsItems} columns={columns} pageSize={5} />
       </Box>
 
       <Dialog open={openDialog} onClose={handleDialogClose}>
         <DialogTitle>
-          {currentPayment.id ? "Edit Payment" : "Add Payment"}
+          {currentContactUs.id ? "Edit Contact Us Item" : "Add Contact Us Item"}
         </DialogTitle>
         <FormikForm
-          currentPayment={currentPayment}
+          currentContactUs={currentContactUs}
           handleDialogSave={handleDialogSave}
           handleClose={handleDialogClose}
         />
@@ -238,22 +248,16 @@ function Payment() {
   );
 }
 
-function FormikForm({ currentPayment, handleDialogSave, handleClose }) {
-  const formatDate = (dateString) => {
-    if (!dateString) return ""; // Ensure dateString is not null
-    const date = new Date(dateString);
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const day = String(date.getDate()).padStart(2, "0");
-    return `${year}-${month}-${day}`;
-  };
-
+function FormikForm({ currentContactUs, handleDialogSave, handleClose }) {
   const formik = useFormik({
     initialValues: {
-      ...currentPayment,
-      payment_at: formatDate(currentPayment.payment_at),
+      id: currentContactUs.id || null,
+      full_name: currentContactUs.full_name || "",
+      email: currentContactUs.email || "",
+      phone_number: currentContactUs.phone_number || "",
+      message: currentContactUs.message || "",
     },
-    validationSchema: PaymentSchema,
+    validationSchema: ContactUsSchema,
     onSubmit: handleDialogSave,
   });
 
@@ -264,52 +268,66 @@ function FormikForm({ currentPayment, handleDialogSave, handleClose }) {
           fullWidth
           margin="dense"
           variant="outlined"
-          id="user_id"
-          name="user_id"
-          label="User ID"
-          type="number"
-          value={formik.values.user_id}
+          id="full_name"
+          name="full_name"
+          label="Full Name"
+          value={formik.values.full_name}
           onChange={formik.handleChange}
-          error={formik.touched.user_id && Boolean(formik.errors.user_id)}
-          helperText={formik.touched.user_id && formik.errors.user_id}
+          error={formik.touched.full_name && Boolean(formik.errors.full_name)}
+          helperText={formik.touched.full_name && formik.errors.full_name}
         />
         <TextField
           fullWidth
           margin="dense"
           variant="outlined"
-          id="money"
-          name="money"
-          label="Amount"
-          type="number"
-          value={formik.values.money}
+          id="email"
+          name="email"
+          label="Email"
+          value={formik.values.email}
           onChange={formik.handleChange}
-          error={formik.touched.money && Boolean(formik.errors.money)}
-          helperText={formik.touched.money && formik.errors.money}
+          error={formik.touched.email && Boolean(formik.errors.email)}
+          helperText={formik.touched.email && formik.errors.email}
         />
         <TextField
           fullWidth
           margin="dense"
           variant="outlined"
-          id="payment_at"
-          name="payment_at"
-          label=""
-          type="date"
-          value={formik.values.payment_at}
+          id="phone_number"
+          name="phone_number"
+          label="Phone Number"
+          value={formik.values.phone_number}
           onChange={formik.handleChange}
           error={
-            formik.touched.payment_at && Boolean(formik.errors.payment_at)
+            formik.touched.phone_number &&
+            Boolean(formik.errors.phone_number)
           }
-          helperText={formik.touched.payment_at && formik.errors.payment_at}
+          helperText={
+            formik.touched.phone_number && formik.errors.phone_number
+          }
+        />
+        <TextField
+          fullWidth
+          margin="dense"
+          variant="outlined"
+          id="message"
+          name="message"
+          label="Message"
+          multiline
+          rows={4}
+          value={formik.values.message}
+          onChange={formik.handleChange}
+          error={formik.touched.message && Boolean(formik.errors.message)}
+          helperText={formik.touched.message && formik.errors.message}
         />
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose}>Cancel</Button>
         <Button type="submit" disabled={formik.isSubmitting}>
-          {currentPayment.id ? "Save" : "Add"}
+          {currentContactUs.id ? "Save" : "Add"}
         </Button>
       </DialogActions>
     </form>
   );
 }
 
-export default Payment;
+export default ContactUs;

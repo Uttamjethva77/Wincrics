@@ -1,9 +1,9 @@
 import React from 'react';
-import { Box, Container, Grid, Link, Typography, IconButton } from '@mui/material';
+import { Box, Container, Grid, Typography, IconButton } from '@mui/material';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import YouTubeIcon from '@mui/icons-material/YouTube';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const Footer = () => {
   const location = useLocation();
@@ -21,57 +21,67 @@ const Footer = () => {
     >
       <Container maxWidth="lg">
         <Grid container spacing={4} alignItems="center">
-          <Grid item xs={12} sm={6} md={3}>
+          <Grid item xs={12} sm={6} md={6}>
             <Typography variant="h6" gutterBottom>
               Company
             </Typography>
-            <Box component="ul" sx={{ listStyle: 'none', p: 0, m: 0, display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, gap: '8px' }}>
+            <Box component="ul" sx={{ listStyle: 'none', p: 0, m: 0, display: 'flex', flexDirection: 'column', gap: '8px' }}>
               <Box component="li">
                 <Link
-                  href="/about"
-                  variant="subtitle1"
-                  color={isActive('/about') ? 'primary' : 'textSecondary'}
-                  sx={isActive('/about') ? { fontWeight: 'bold' } : {}}
+                  to="/about"
+                  style={{
+                    textDecoration: 'none',
+                    color: isActive('/about') ? 'black' : 'gray',
+                    fontWeight: isActive('/about') ? 'bold' : 'normal',
+                  }}
                 >
                   About Us
                 </Link>
               </Box>
               <Box component="li">
                 <Link
-                  href="/contact"
-                  variant="subtitle1"
-                  color={isActive('/contact') ? 'primary' : 'textSecondary'}
-                  sx={isActive('/contact') ? { fontWeight: 'bold' } : {}}
+                  to="/contact"
+                  style={{
+                    textDecoration: 'none',
+                    color: isActive('/contact') ? 'black' : 'gray',
+                    fontWeight: isActive('/contact') ? 'bold' : 'normal',
+                  }}
                 >
                   Contact Us
                 </Link>
               </Box>
               <Box component="li">
                 <Link
-                  href="/terms"
-                  variant="subtitle1"
-                  color={isActive('/terms') ? 'primary' : 'textSecondary'}
-                  sx={isActive('/terms') ? { fontWeight: 'bold' } : {}}
+                  to="/terms"
+                  style={{
+                    textDecoration: 'none',
+                    color: isActive('/terms') ? 'black' : 'gray',
+                    fontWeight: isActive('/terms') ? 'bold' : 'normal',
+                  }}
                 >
                   Terms & Conditions
                 </Link>
               </Box>
               <Box component="li">
                 <Link
-                  href="/policy"
-                  variant="subtitle1"
-                  color={isActive('/policy') ? 'primary' : 'textSecondary'}
-                  sx={isActive('/policy') ? { fontWeight: 'bold' } : {}}
+                  to="/policy"
+                  style={{
+                    textDecoration: 'none',
+                    color: isActive('/policy') ? 'black' : 'gray',
+                    fontWeight: isActive('/policy') ? 'bold' : 'normal',
+                  }}
                 >
                   Privacy Policy
                 </Link>
               </Box>
               <Box component="li">
                 <Link
-                  href="/billing"
-                  variant="subtitle1"
-                  color={isActive('/billing') ? 'primary' : 'textSecondary'}
-                  sx={isActive('/billing') ? { fontWeight: 'bold' } : {}}
+                  to="/billing"
+                  style={{
+                    textDecoration: 'none',
+                    color: isActive('/billing') ? 'black' : 'gray',
+                    fontWeight: isActive('/billing') ? 'bold' : 'normal',
+                  }}
                 >
                   Billing & Subscription
                 </Link>
@@ -84,13 +94,13 @@ const Footer = () => {
                 Follow Us
               </Typography>
               <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
-                <IconButton href="#" color="inherit">
+                <IconButton href="https://www.facebook.com" target="_blank" color="inherit">
                   <FacebookIcon />
                 </IconButton>
-                <IconButton href="#" color="inherit">
+                <IconButton href="https://www.instagram.com" target="_blank" color="inherit">
                   <InstagramIcon />
                 </IconButton>
-                <IconButton href="#" color="inherit">
+                <IconButton href="https://www.youtube.com" target="_blank" color="inherit">
                   <YouTubeIcon />
                 </IconButton>
               </Box>

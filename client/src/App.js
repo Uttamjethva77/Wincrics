@@ -15,6 +15,14 @@ import Loginuser from "./pages/userpages/Login";
 import ResponsiveAppBar from "./pages/userpages/Home";
 import Videos from "./pages/userpages/Videos";
 import Userpackages from "./pages/userpages/Packages";
+import Winningsuser from "./pages/userpages/Winnings";
+import ContactUs from "./pages/adminpages/Contactus";
+import Profile from "./pages/userpages/Profile";
+import Policy from "./pages/userpages/Policy";
+import Billing from "./pages/userpages/Billing";
+import Terms from "./pages/userpages/Terms";
+import About from "./pages/userpages/About";
+import Contact from "./pages/userpages/Contact";
 
 function App() {
   return (
@@ -63,8 +71,6 @@ function App() {
             <Route path="/about" element={<About></About>}></Route>
             <Route path="/contact" element={<Contact></Contact>}></Route>
             <Route path="/billing" element={<Billing></Billing>}></Route>
-
-
           </Route>
         </Routes>
       </BrowserRouter>

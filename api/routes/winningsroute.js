@@ -4,7 +4,7 @@ const { logAnalytics } = require('../middelwear/analytics');
 const { authenticateToken } = require('../middelwear/authenticate');
 const winningRoute = express.Router();
 winningRoute.use(logAnalytics);
-winningRoute.use(authenticateToken);
+// winningRoute.use(authenticateToken);
 
 // Create a new winning
 winningRoute.post('/', WinningController.create);

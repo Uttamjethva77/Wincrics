@@ -11,6 +11,7 @@ import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import GroupIcon from '@mui/icons-material/Group';
 import CollectionsIcon from '@mui/icons-material/Collections';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+import ContactPageIcon from '@mui/icons-material/ContactPage';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 
 const sidebarItems = [
@@ -22,6 +23,7 @@ const sidebarItems = [
   { text: 'Users', icon: <GroupIcon sx={{ fontSize: "30px" }} />, path: '/admin/users' },
   { text: 'AdminUsers', icon: <AdminPanelSettingsIcon sx={{ fontSize: "30px" }} />, path: '/admin/adminusers' },
   { text: 'Winnings', icon: <CollectionsIcon sx={{ fontSize: "30px" }} />, path: '/admin/winnings' },
+  { text: 'Contactus', icon: <ContactPageIcon sx={{ fontSize: "30px" }} />, path: '/admin/contactus' },
 ];
 
 const Sidebar = () => {

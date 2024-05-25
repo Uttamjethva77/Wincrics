@@ -10,6 +10,7 @@ import Users from './pages/adminpages/Users';
 import Login from './pages/adminpages/Login';
 import Winnings from './pages/adminpages/Winnings'
 import AdminUsers from './pages/adminpages/AdminUsers';
+import ContactUs from './pages/adminpages/Contactus'
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
             <Route path="users" element={<Users />} />
             <Route path="adminusers" element={<AdminUsers />} />
             <Route path="winnings" element={<Winnings />} />
+            <Route path="contactus" element={<ContactUs />} />
           </Route>
         </Routes>
       </BrowserRouter>

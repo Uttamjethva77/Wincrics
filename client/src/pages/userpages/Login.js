@@ -54,11 +54,13 @@ const Loginuser = () => {
 
         const user = await response.json();
         console.log("User logged in:", user);
+        
+        localStorage.setItem("userdata",JSON.stringify(user))
 
         setSnackbarMessage("Login successful");
         setSnackbarSeverity("success");
         setOpenSnackbar(true);
-        navigate("/home")
+        navigate("/")
       } catch (error) {
         console.error("Error:", error);
         setErrors({ api: error.message });

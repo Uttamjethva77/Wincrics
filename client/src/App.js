@@ -15,6 +15,13 @@ import Loginuser from "./pages/userpages/Login";
 import ResponsiveAppBar from "./pages/userpages/Home";
 import Videos from "./pages/userpages/Videos";
 import Userpackages from "./pages/userpages/Packages";
+import Winningsuser from "./pages/userpages/Winnings";
+import Profile from "./pages/userpages/Profile";
+import Terms from "./pages/userpages/Terms";
+import Policy from "./pages/userpages/Policy";
+import About from "./pages/userpages/About";
+import Contact from "./pages/userpages/Contact";
+import Billing from "./pages/userpages/Billing";
 
 function App() {
   return (
@@ -40,9 +47,30 @@ function App() {
           <Route path="login" element={<Loginuser></Loginuser>}></Route>
           <Route path="/" element={<ResponsiveAppBar></ResponsiveAppBar>}>
             <Route path="/videos" element={<Videos></Videos>}></Route>
-            <Route path="/blog" element={<div><h1>blog</h1></div>}></Route>
-            <Route path="/winnings" element={<h1>winnings</h1>}></Route>
-            <Route path="/packages" element={<Userpackages></Userpackages>}></Route>
+            <Route
+              path="/blog"
+              element={
+                <div>
+                  <h1>blog</h1>
+                </div>
+              }
+            ></Route>
+            <Route
+              path="/winnings"
+              element={<Winningsuser></Winningsuser>}
+            ></Route>
+            <Route
+              path="/packages"
+              element={<Userpackages></Userpackages>}
+            ></Route>
+            <Route path="/profile" element={<Profile></Profile>}></Route>
+            <Route path="/terms" element={<Terms></Terms>}></Route>
+            <Route path="/policy" element={<Policy></Policy>}></Route>
+            <Route path="/about" element={<About></About>}></Route>
+            <Route path="/contact" element={<Contact></Contact>}></Route>
+            <Route path="/billing" element={<Billing></Billing>}></Route>
+
+
           </Route>
         </Routes>
       </BrowserRouter>

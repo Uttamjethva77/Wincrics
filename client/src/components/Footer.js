@@ -3,8 +3,13 @@ import { Box, Container, Grid, Link, Typography, IconButton } from '@mui/materia
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import YouTubeIcon from '@mui/icons-material/YouTube';
+import { useLocation } from 'react-router-dom';
 
 const Footer = () => {
+  const location = useLocation();
+
+  const isActive = (path) => location.pathname === path;
+
   return (
     <Box
       component="footer"
@@ -22,27 +27,52 @@ const Footer = () => {
             </Typography>
             <Box component="ul" sx={{ listStyle: 'none', p: 0, m: 0, display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, gap: '8px' }}>
               <Box component="li">
-                <Link href="#" variant="subtitle1" color="textSecondary">
+                <Link
+                  href="/about"
+                  variant="subtitle1"
+                  color={isActive('/about') ? 'primary' : 'textSecondary'}
+                  sx={isActive('/about') ? { fontWeight: 'bold' } : {}}
+                >
                   About Us
                 </Link>
               </Box>
               <Box component="li">
-                <Link href="#" variant="subtitle1" color="textSecondary">
+                <Link
+                  href="/contact"
+                  variant="subtitle1"
+                  color={isActive('/contact') ? 'primary' : 'textSecondary'}
+                  sx={isActive('/contact') ? { fontWeight: 'bold' } : {}}
+                >
                   Contact Us
                 </Link>
               </Box>
               <Box component="li">
-                <Link href="#" variant="subtitle1" color="textSecondary">
+                <Link
+                  href="/terms"
+                  variant="subtitle1"
+                  color={isActive('/terms') ? 'primary' : 'textSecondary'}
+                  sx={isActive('/terms') ? { fontWeight: 'bold' } : {}}
+                >
                   Terms & Conditions
                 </Link>
               </Box>
               <Box component="li">
-                <Link href="#" variant="subtitle1" color="textSecondary">
+                <Link
+                  href="/policy"
+                  variant="subtitle1"
+                  color={isActive('/policy') ? 'primary' : 'textSecondary'}
+                  sx={isActive('/policy') ? { fontWeight: 'bold' } : {}}
+                >
                   Privacy Policy
                 </Link>
               </Box>
               <Box component="li">
-                <Link href="#" variant="subtitle1" color="textSecondary">
+                <Link
+                  href="/billing"
+                  variant="subtitle1"
+                  color={isActive('/billing') ? 'primary' : 'textSecondary'}
+                  sx={isActive('/billing') ? { fontWeight: 'bold' } : {}}
+                >
                   Billing & Subscription
                 </Link>
               </Box>

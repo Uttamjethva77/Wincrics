@@ -5,7 +5,7 @@ const { authenticateToken } = require('../middelwear/authenticate');
 const packagesRoute = express.Router();
 // Middleware to log analytics data for all routes
 packagesRoute.use(logAnalytics);
-packagesRoute.use(authenticateToken);
+// packagesRoute.use(authenticateToken);
 // Create a new package
 packagesRoute.post('/',PackageController.create);
 

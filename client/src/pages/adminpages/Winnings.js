@@ -26,7 +26,7 @@ const API_URL = "http://localhost:3000/winnings";
 
 // Validation schema for the winnings form
 const WinningsSchema = Yup.object().shape({
-  images: Yup.string().url("Invalid URL").required("Image URL is required"),
+  images: Yup.string().required("Image URL is required"),
 });
 
 // Alert component for Snackbar
@@ -87,8 +87,8 @@ function Winnings() {
       const response = await fetch(`${API_URL}/${id}`, {
         method: "DELETE",
         headers: {
-          'Authorization': token,
-        }
+          Authorization: token,
+        },
       });
       if (!response.ok) {
         throw new Error("Network response was not ok");

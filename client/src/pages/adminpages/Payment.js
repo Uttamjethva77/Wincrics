@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
-import { Box, Divider, Button, TextField } from '@mui/material';
+import { Box, Divider, Button, TextField, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
 import { LocalizationProvider, DatePicker } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { format } from 'date-fns';
@@ -9,11 +9,13 @@ const Payment = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const [tok, settok] = useState("");
+  const [tok, setTok] = useState("");
+  const [openDialog, setOpenDialog] = useState(false);
+  const [formData, setFormData] = useState({ user_id: '', money: '', payment_at: null });
 
   useEffect(() => {
     const token = localStorage.getItem("admintoken");
-    settok(token);
+    setTok(token);
   }, []);
 
   useEffect(() => {
@@ -40,27 +42,110 @@ const Payment = () => {
     }
   };
 
+  const handleOpenDialog = () => {
+    setOpenDialog(true);
+  };
+
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
+    setFormData({ user_id: '', money: '', payment_at: null });
+  };
+
+  const handleFormChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleDateChange = (date) => {
+    setFormData({ ...formData, payment_at: date });
+  };
+
+  const handleCreatePayment = async () => {
+    if (!formData.payment_at) {
+      console.error('Payment date is required');
+      return;
+    }
+  
+    try {
+      const response = await fetch(`http://localhost:3000/payment`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `${tok}`
+        },
+        body: JSON.stringify(formData)
+      });
+      if (response.ok) {
+        fetchData(selectedDate);
+        handleCloseDialog();
+      } else {
+        throw new Error('Failed to create payment');
+      }
+    } catch (error) {
+      console.error('Error creating payment:', error);
+    }
+  };
+  
+  const handleEditPayment = async () => {
+    if (!formData.payment_at) {
+      console.error('Payment date is required');
+      return;
+    }
+  
+    try {
+      const response = await fetch(`http://localhost:3000/payment/${formData.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `${tok}`
+        },
+        body: JSON.stringify(formData)
+      });
+      if (response.ok) {
+        fetchData(selectedDate);
+        handleCloseDialog();
+      } else {
+        throw new Error('Failed to edit payment');
+      }
+    } catch (error) {
+      console.error('Error editing payment:', error);
+    }
+  };
+
+  const handleDeletePayment = async (id) => {
+    try {
+      const response = await fetch(`http://localhost:3000/payment/${id}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `${tok}`
+        }
+      });
+      if (response.ok) {
+        fetchData(selectedDate);
+      } else {
+        throw new Error('Failed to delete payment');
+      }
+    } catch (error) {
+      console.error('Error deleting payment:', error);
+    }
+  };
+
   const columns = [
     { field: 'user_id', headerName: 'User ID', width: 100 },
     { field: 'money', headerName: 'Amount', width: 150 },
     { field: 'payment_at', headerName: 'Payment Date', width: 250 },
+    {
+      field: 'actions',
+      headerName: 'Actions',
+      width: 150,
+      renderCell: (params) => (
+        <>
+          <Button variant="outlined" onClick={() => handleEditPayment(params.row)}>Edit</Button>
+          <Button variant="outlined" onClick={() => handleDeletePayment(params.row.id)}>Delete</Button>
+        </>
+      ),
+    },
   ];
-
-  const exportToCSV = () => {
-    const currentDate = format(new Date(), 'yyyyMMdd');
-    const fileName = `payments_${currentDate}.csv`;
-
-    const csvContent = "data:text/csv;charset=utf-8," 
-      + columns.map(column => column.headerName).join(",") + "\n"
-      + data.map(row => columns.map(column => row[column.field]).join(",")).join("\n");
-
-    const encodedUri = encodeURI(csvContent);
-    const link = document.createElement("a");
-    link.setAttribute("href", encodedUri);
-    link.setAttribute("download", fileName);
-    document.body.appendChild(link);
-    link.click();
-  };
 
   return (
     <Box sx={{ height: '90%', padding: 2 }}>
@@ -77,7 +162,7 @@ const Payment = () => {
       <Divider sx={{ mb: 2 }} />
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
         <Box />
-        <Button variant="contained" onClick={exportToCSV}>Export CSV</Button>
+        <Button variant="contained" onClick={handleOpenDialog}>Add Payment</Button>
       </Box>
       <Box sx={{ height: 500, width: '100%' }}>
         <DataGrid
@@ -88,6 +173,45 @@ const Payment = () => {
           checkboxSelection
         />
       </Box>
+      <Dialog open={openDialog} onClose={handleCloseDialog}>
+        <DialogTitle>Add Payment</DialogTitle>
+        <DialogContent>
+          <TextField
+            fullWidth
+            margin="dense"
+            variant="outlined"
+            id="user_id"
+            name="user_id"
+            label="User ID"
+            value={formData.user_id}
+            onChange={handleFormChange}
+          />
+          <TextField
+            fullWidth
+            margin="dense"
+            variant="outlined"
+            id="money"
+            name="money"
+            label="Amount"
+            value={formData.money}
+            onChange={handleFormChange}
+          />
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <DatePicker
+              label="Payment Date"
+              value={formData.payment_at}
+              onChange={handleDateChange}
+              renderInput={(params) => <TextField {...params} />}
+            />
+          </LocalizationProvider>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseDialog}>Cancel</Button>
+          <Button onClick={formData.id ? handleEditPayment : handleCreatePayment} color="primary">
+            {formData.id ? 'Edit Payment' : 'Create Payment'}
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 };

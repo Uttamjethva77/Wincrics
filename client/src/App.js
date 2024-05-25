@@ -15,6 +15,7 @@ import Loginuser from "./pages/userpages/Login";
 import ResponsiveAppBar from "./pages/userpages/Home";
 import Videos from "./pages/userpages/Videos";
 import Userpackages from "./pages/userpages/Packages";
+import ContactUs from './pages/adminpages/Contactus'
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
             <Route path="users" element={<Users />} />
             <Route path="adminusers" element={<AdminUsers />} />
             <Route path="winnings" element={<Winnings />} />
+            <Route path="contactus" element={<ContactUs />} />
           </Route>
 
           <Route path="/register" element={<Register></Register>}></Route>

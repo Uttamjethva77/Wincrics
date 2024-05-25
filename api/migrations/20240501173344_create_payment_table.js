@@ -7,7 +7,7 @@ exports.up = function(knex) {
     table.increments('id').primary();
     table.integer('user_id').unsigned().references('id').inTable('users');
     table.integer('money').notNullable();
-    table.date('payment_at').notNullable();
+    table.date('payment_at');
   });
 };
 

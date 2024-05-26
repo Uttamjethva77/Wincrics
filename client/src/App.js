@@ -23,6 +23,7 @@ import Billing from "./pages/userpages/Billing";
 import Terms from "./pages/userpages/Terms";
 import About from "./pages/userpages/About";
 import Contact from "./pages/userpages/Contact";
+import ForgotPassword from './pages/userpages/Forgetpassword'
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
 
           <Route path="/register" element={<Register></Register>}></Route>
           <Route path="login" element={<Loginuser></Loginuser>}></Route>
+          <Route path="forgetpassword" element={<ForgotPassword></ForgotPassword>}></Route>
           <Route path="/" element={<ResponsiveAppBar></ResponsiveAppBar>}>
             <Route path="/videos" element={<Videos></Videos>}></Route>
             <Route

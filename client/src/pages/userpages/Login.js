@@ -151,14 +151,27 @@ const Loginuser = () => {
             />
             </Box>
            
-          <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
-            <Typography>Don't have an account?</Typography>{" "}
-            <Link to="/register" style={{ textDecoration: "none" }}>
-              <Typography color="primary" sx={{ ml: 1, cursor: "pointer" }}>
-                Register
-              </Typography>
-            </Link>
-          </Box>
+            <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
+  <Typography>
+    Don't have an account?
+  </Typography>{" "}
+  <Link to="/register" style={{ textDecoration: "none" }}>
+    <Typography color="primary" sx={{ ml: 1, cursor: "pointer" }}>
+      Register
+    </Typography>
+  </Link>
+</Box>
+
+<Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
+  <Typography>
+    Forgot password?
+  </Typography>{" "}
+  <Link to="/Forgetpassword" style={{ textDecoration: "none" }}>
+    <Typography color="primary" sx={{ ml: 1, cursor: "pointer" }}>
+      Click here
+    </Typography>
+  </Link>
+</Box>
           <Button
             type="submit"
             fullWidth

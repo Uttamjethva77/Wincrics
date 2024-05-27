@@ -22,4 +22,27 @@ async function getAllBlogsData() {
   }
 }
 
-module.exports = { getAllBlogsData };
+async function getBlogById(blogId) {
+  try {
+    const client = await pool.connect();
+
+    // Query to select specific fields for a blog by ID
+    const query = `
+    SELECT id, title, blogimage, match_news, date, time, venue, squad_team1, squad_team2, 
+    imp_player, captain, fantasy_team, vice_captain, upload_by, tags, metadata, description, 
+    playing_11_team1, playing_11_team2
+      FROM blogs
+      WHERE id = $1
+    `;
+    
+    const result = await client.query(query, [blogId]);
+    client.release(); // Release the client back to the pool
+
+    return result.rows[0]; // Assuming ID is unique, so only one row is expected
+  } catch (error) {
+    console.error('Error fetching blog by ID:', error);
+    throw error;
+  }
+}
+
+module.exports = { getAllBlogsData, getBlogById };

@@ -4,7 +4,7 @@ const { logAnalytics } = require('../middelwear/analytics');
 const notificationRoute = express.Router();
 const { authenticateToken } = require('../middelwear/authenticate');
 notificationRoute.use(logAnalytics);
-notificationRoute.use(authenticateToken);
+// notificationRoute.use(authenticateToken);
 
 // Create a new notification
 notificationRoute.post('/', NotificationController.create);

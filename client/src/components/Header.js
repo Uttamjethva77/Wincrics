@@ -24,10 +24,10 @@ import ArticleIcon from "@mui/icons-material/Article";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import SettingsIcon from "@mui/icons-material/Settings";
 import DashboardIcon from "@mui/icons-material/Dashboard";
-import LogoutIcon from "@mui/icons-material/Logout";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import PersonIcon from "@mui/icons-material/Person";
+import SportsCricketIcon from '@mui/icons-material/SportsCricket';
 
 const Header = () => {
   const [drawerOpen, setDrawerOpen] = React.useState(false);
@@ -38,12 +38,12 @@ const Header = () => {
 
   const menuItems = [
     //   { text: "Home", icon: <HomeIcon />, route: "/home" },
-    { text: "packages", icon: <PriceCheckIcon />, route: "/packages" },
-    { text: "Blog", icon: <ArticleIcon />, route: "/blog" },
-    { text: "videos", icon: <AccountCircleIcon />, route: "/videos" },
-    { text: "winnings", icon: <SettingsIcon />, route: "/winnings" },
+    { text: "Packages", icon: <PriceCheckIcon />, route: "/packages" },
+    { text: "Prime Teams", icon: <SportsCricketIcon />, route: "/prime-teams" },
+    { text: "Blogs", icon: <ArticleIcon />, route: "/blog" },
+    { text: "Videos", icon: <AccountCircleIcon />, route: "/videos" },
+    { text: "Winnings", icon: <SettingsIcon />, route: "/winnings" },
     { text: "Dashboard", icon: <DashboardIcon />, route: "/dashboard" },
-    { text: "Logout", icon: <LogoutIcon />, route: "/logout" },
   ];
 
   useEffect(() => {

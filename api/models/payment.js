@@ -19,7 +19,7 @@ class Payment {
   }
 
   static async getById(id) {
-    const query = 'SELECT * FROM payments WHERE id = $1';
+    const query = 'SELECT * FROM payments WHERE user_id = $1';
     const values = [id];
     const result = await pool.query(query, values);
     return result.rows[0];

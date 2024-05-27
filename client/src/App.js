@@ -24,6 +24,8 @@ import Terms from "./pages/userpages/Terms";
 import About from "./pages/userpages/About";
 import Contact from "./pages/userpages/Contact";
 import ForgotPassword from './pages/userpages/Forgetpassword'
+import PrimeTeams from './pages/userpages/PrimeTeams'
+import PrimeTeamDetails from './pages/userpages/PrimeTeamsDetails'
 
 function App() {
   return (
@@ -59,6 +61,11 @@ function App() {
                 </div>
               }
             ></Route>
+            <Route
+              path="/prime-teams"
+              element={<PrimeTeams></PrimeTeams>}
+            ></Route>
+            <Route path="/prime-teams/:id" element={<PrimeTeamDetails></PrimeTeamDetails>} />
             <Route
               path="/winnings"
               element={<Winningsuser></Winningsuser>}

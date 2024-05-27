@@ -26,7 +26,7 @@ const Analytics = () => {
     setLoading(true);
     try {
       const formattedDate = format(date, 'MM/dd/yyyy');
-      const response = await fetch(`http://localhost:3000/analytics?page=1&filters[date]=${formattedDate}`, {
+      const response = await fetch(`http://localhost:3000/analytics?filters[date]=${formattedDate}`, {
         headers: {
           'Authorization': `${tok}`
         }

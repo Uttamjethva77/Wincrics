@@ -56,7 +56,7 @@ const PrimeTeams = () => {
                     });
 
                     const forgotPasswordData = await forgotPasswordResponse.json();
-                    
+                    toast.info('OTP sent to your email. Please check your inbox.');
 
                     // Check if OTP number is "verify"
                     if (forgotPasswordData.otpEntry && forgotPasswordData.otpEntry.otp_number === "verify") {

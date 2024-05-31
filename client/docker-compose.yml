@@ -27,10 +27,11 @@ services:
 
   certbot:
     image: certbot/certbot
-    restart: always
-    command: certonly --webroot --webroot-path=/etc/nginx/certs --email wincricsinfotech@gmail.com --agree-tos -d wincrics.com
+    container_name: certbot
+    command: certonly --webroot -w /var/www/certbot --email wincricsinfotech@gmail.com --agree-tos -d wincrics.com
     volumes:
-      - ./certs:/etc/nginx/certs  # Store generated certificates
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
     depends_on:
       - nginx
     networks:

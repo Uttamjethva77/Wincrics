@@ -23,9 +23,13 @@ import Billing from "./pages/userpages/Billing";
 import Terms from "./pages/userpages/Terms";
 import About from "./pages/userpages/About";
 import Contact from "./pages/userpages/Contact";
-import ForgotPassword from './pages/userpages/Forgetpassword'
-import PrimeTeams from './pages/userpages/PrimeTeams'
-import PrimeTeamDetails from './pages/userpages/PrimeTeamsDetails'
+import ForgotPassword from "./pages/userpages/Forgetpassword";
+import PrimeTeams from "./pages/userpages/PrimeTeams";
+import PrimeTeamDetails from "./pages/userpages/PrimeTeamsDetails";
+import Blog from "./pages/userpages/Blog";
+import BlogDetail from "./pages/userpages/BlogDetail";
+
+import Mainhome from './pages/userpages/Mainhome';
 
 function App() {
   return (
@@ -50,22 +54,23 @@ function App() {
 
           <Route path="/register" element={<Register></Register>}></Route>
           <Route path="login" element={<Loginuser></Loginuser>}></Route>
-          <Route path="forgetpassword" element={<ForgotPassword></ForgotPassword>}></Route>
+          <Route
+            path="forgetpassword"
+            element={<ForgotPassword></ForgotPassword>}
+          ></Route>
           <Route path="/" element={<ResponsiveAppBar></ResponsiveAppBar>}>
+          <Route path="/" element={<Mainhome></Mainhome>}></Route>
             <Route path="/videos" element={<Videos></Videos>}></Route>
-            <Route
-              path="/blog"
-              element={
-                <div>
-                  <h1>blog</h1>
-                </div>
-              }
-            ></Route>
+            <Route path="/blog" element={<Blog></Blog>}></Route>
+            <Route path="/blogdata/:id" element={<BlogDetail />} />
             <Route
               path="/prime-teams"
               element={<PrimeTeams></PrimeTeams>}
             ></Route>
-            <Route path="/prime-teams/:id" element={<PrimeTeamDetails></PrimeTeamDetails>} />
+            <Route
+              path="/prime-teams/:id"
+              element={<PrimeTeamDetails></PrimeTeamDetails>}
+            />
             <Route
               path="/winnings"
               element={<Winningsuser></Winningsuser>}

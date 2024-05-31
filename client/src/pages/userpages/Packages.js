@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Grid, Card, CardContent, Typography, Box, List, ListItem, ListItemText, Button } from '@mui/material';
-import { keyframes } from '@mui/system';
+
 import CheckIcon from '@mui/icons-material/Check'; // Import the CheckIcon from Material-UI icons
 import RupeeIcon from '@mui/icons-material/AttachMoney'; // Import the RupeeIcon from Material-UI icons
 

@@ -1,3 +1,4 @@
+
 const express = require('express');
 const cors = require('cors');
 const app = express();
@@ -20,12 +21,7 @@ const forgot = require('./routes/forgotpassword')
 const updatepassword = require('./routes/updatepassword') 
 const contactUsRoute = require('./routes/contactus')
 
-const corsOptions = {
-  origin: 'https://wincrics.com',
-  optionsSuccessStatus: 200 // Some legacy browsers (IE11, various SmartTVs) choke on 204
-};
-
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(express.json());
 app.use('/users', usersroute);
 app.use('/adminlogin', adminLog);

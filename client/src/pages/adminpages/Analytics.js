@@ -26,7 +26,7 @@ const Analytics = () => {
     setLoading(true);
     try {
       const formattedDate = format(date, 'MM/dd/yyyy');
-      const response = await fetch(`http://194.238.18.76:3000/analytics?filters[date]=${formattedDate}`, {
+      const response = await fetch(`https://wincrics.com:8443/analytics?filters[date]=${formattedDate}`, {
         headers: {
           'Authorization': `${tok}`
         }

@@ -27,6 +27,20 @@ services:
     networks:
       - wincrics_network
 
+  nginx:
+    image: nginx:latest
+    restart: always
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./fullchain.pem:/etc/nginx/certs/fullchain.pem
+      - ./privatekey.pem:/etc/nginx/certs/privatekey.pem
+    ports:
+      - "8443:8443"
+    depends_on:
+      - node
+    networks:
+      - wincrics_network
+
 
 networks:
   wincrics_network:

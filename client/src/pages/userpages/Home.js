@@ -11,7 +11,7 @@ function ResponsiveAppBar() {
     <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
       <Header />
       <Box
-        component="main"
+       
         sx={{
           flexGrow: 1,
           overflowY: "auto", // Enable vertical scrolling if needed

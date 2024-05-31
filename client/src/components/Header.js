@@ -43,12 +43,12 @@ const Header = () => {
     { text: "Blogs", icon: <ArticleIcon />, route: "/blog" },
     { text: "Videos", icon: <AccountCircleIcon />, route: "/videos" },
     { text: "Winnings", icon: <SettingsIcon />, route: "/winnings" },
-    { text: "Dashboard", icon: <DashboardIcon />, route: "/dashboard" },
+    // { text: "Dashboard", icon: <DashboardIcon />, route: "/dashboard" },
   ];
 
   useEffect(() => {
     const userdata = localStorage.getItem("userdata");
-    console.log(JSON.parse(userdata));
+    // console.log(JSON.parse(userdata));
     setdata(JSON.parse(userdata));
   }, [logout]);
 

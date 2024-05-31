@@ -74,7 +74,7 @@ function Blogs() {
     images: [],
     playing_11_team1: [],
     playing_11_team2: [],
-    deleted_by: false,
+    deleted_by: "null",
   });
   const [error, setError] = useState(null);
   const [snackbarOpen, setSnackbarOpen] = useState(false);

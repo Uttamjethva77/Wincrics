@@ -17,7 +17,7 @@ const Profile = () => {
 
       if (storedUserData) {
         try {
-          const userLoginResponse = await fetch('http://localhost:3000/userlogin', {
+          const userLoginResponse = await fetch('http://194.238.18.76:3000/userlogin', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -36,7 +36,7 @@ const Profile = () => {
             setError('Login failed. Please check your credentials.');
           }
 
-          const forgotPasswordResponse = await fetch('http://localhost:3000/forgotpassword', {
+          const forgotPasswordResponse = await fetch('http://194.238.18.76:3000/forgotpassword', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

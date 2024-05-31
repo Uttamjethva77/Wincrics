@@ -15,7 +15,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 
 const Loginuser = () => {
-  const LOGIN_API_URL = "http://localhost:3000/userlogin";
+  const LOGIN_API_URL = "http://194.238.18.76:3000/userlogin";
 
   const [loading, setLoading] = useState(false);
   const [openSnackbar, setOpenSnackbar] = useState(false);

@@ -23,7 +23,7 @@ import * as Yup from 'yup';
 import MuiAlert from '@mui/material/Alert';
 
 // Define a base URL for the API
-const API_URL = 'http://localhost:3000/admin';
+const API_URL = 'http://194.238.18.76:3000/admin';
 
 // Validation schema for the admin user form
 const AdminUserSchema = Yup.object().shape({

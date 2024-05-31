@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router';
 
 const theme = createTheme();
 
-const API_URL = "http://localhost:3000/adminlogin";
+const API_URL = "http://194.238.18.76:3000/adminlogin";
 
 function Login() {
 

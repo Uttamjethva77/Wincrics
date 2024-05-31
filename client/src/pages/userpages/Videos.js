@@ -16,7 +16,7 @@ const Videos = () => {
   useEffect(() => {
     const fetchVideos = async () => {
       try {
-        const response = await fetch("http://localhost:3000/videos");
+        const response = await fetch("http://194.238.18.76:3000/videos");
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }

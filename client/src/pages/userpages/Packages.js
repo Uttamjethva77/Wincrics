@@ -8,7 +8,7 @@ const Userpackages = () => {
   const [packages, setPackages] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:3000/packagess')
+    fetch('http://194.238.18.76:3000/packagess')
       .then(response => response.json())
       .then(data => setPackages(data))
       .catch(error => console.error('Error fetching data:', error));

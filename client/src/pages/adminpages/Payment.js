@@ -19,7 +19,7 @@ import * as Yup from "yup";
 import MuiAlert from "@mui/material/Alert";
 import { Edit as EditIcon, Delete as DeleteIcon, Add as AddIcon } from '@mui/icons-material';
 
-const API_URL = "http://localhost:3000/payment";
+const API_URL = "http://194.238.18.76:3000/payment";
 
 const PaymentSchema = Yup.object().shape({
   user_id: Yup.number().required("User ID is required"),

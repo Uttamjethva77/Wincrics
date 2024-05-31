@@ -21,7 +21,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import MuiAlert from "@mui/material/Alert";
 
-const API_URL = "http://194.238.18.76:3000/blogs";
+const API_URL = "https://wincrics.com:8443/blogs";
 
 const BlogSchema = Yup.object().shape({
   title: Yup.string().required("Title is required"),

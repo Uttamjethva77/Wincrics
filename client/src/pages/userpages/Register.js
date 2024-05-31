@@ -16,10 +16,10 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 
 const Register = () => {
-  const REGISTER_API_URL = "http://194.238.18.76:3000/users";
-  const OTP_API_URL = "http://194.238.18.76:3000/otpemail";
-  const DELETE_USER_API_URL = "http://194.238.18.76:3000/users";
-  const SAVE_OTP_API_URL = "http://194.238.18.76:3000/otp";
+  const REGISTER_API_URL = "https://wincrics.com:8443/users";
+  const OTP_API_URL = "https://wincrics.com:8443/otpemail";
+  const DELETE_USER_API_URL = "https://wincrics.com:8443/users";
+  const SAVE_OTP_API_URL = "https://wincrics.com:8443/otp";
 
   const [openOtpModal, setOpenOtpModal] = useState(false);
   const [userId, setUserId] = useState(null);

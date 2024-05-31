@@ -6,7 +6,7 @@ import Slide from '@mui/material/Slide';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const API_URL = 'http://194.238.18.76:3000';
+const API_URL = 'https://wincrics.com:8443';
 
 const PrimeTeams = () => {
     const [userData, setUserData] = useState(null);

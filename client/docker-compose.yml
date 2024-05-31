@@ -16,10 +16,23 @@ services:
     restart: always
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./certs:/etc/nginx/certs  # Mount a volume for SSL certificates
     ports:
       - "80:80"
+      - "443:443"  # Expose port 443 for SSL
     depends_on:
       - react
+    networks:
+      - wincrics_networkk
+
+  certbot:
+    image: certbot/certbot
+    restart: always
+    command: certonly --webroot --webroot-path=/etc/nginx/certs --email wincricsinfotech@gmail.com --agree-tos -d wincrics.com
+    volumes:
+      - ./certs:/etc/nginx/certs  # Store generated certificates
+    depends_on:
+      - nginx
     networks:
       - wincrics_networkk
 

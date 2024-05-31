@@ -6,8 +6,6 @@ services:
       context: .
       dockerfile: Dockerfile
     restart: always
-    ports:
-      - "5000:5000"
     networks:
       - wincrics_networkk
 
@@ -16,26 +14,16 @@ services:
     restart: always
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
-      - ./certs:/etc/nginx/certs  # Mount a volume for SSL certificates
+      - ./fullchain.pem:/etc/nginx/certs/fullchain.pem
+      - ./privatekey.pem:/etc/nginx/certs/privatekey.pem
     ports:
       - "80:80"
-      - "443:443"  # Expose port 443 for SSL
+      - "443:443"
     depends_on:
       - react
     networks:
       - wincrics_networkk
 
-  certbot:
-    image: certbot/certbot
-    container_name: certbot
-    command: certonly --webroot -w /var/www/certbot --email wincricsinfotech@gmail.com --agree-tos -d wincrics.com
-    volumes:
-      - ./certbot/conf:/etc/letsencrypt
-      - ./certbot/www:/var/www/certbot
-    depends_on:
-      - nginx
-    networks:
-      - wincrics_networkk
-
 networks:
   wincrics_networkk:
+    driver: bridge

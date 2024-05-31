@@ -22,7 +22,7 @@ import * as Yup from "yup";
 import MuiAlert from "@mui/material/Alert";
 
 // Define a base URL for the API
-const API_URL = "http://194.238.18.76:3000/contactus";
+const API_URL = "https://wincrics.com:8443/contactus";
 
 // Validation schema for the contactus form
 const ContactUsSchema = Yup.object().shape({

@@ -22,7 +22,7 @@ import * as Yup from "yup";
 import MuiAlert from "@mui/material/Alert";
 
 // Define a base URL for the API
-const API_URL = "https://wincrics.com:8443/videos";
+const API_URL = "http://194.238.18.76:3000/videos";
 
 // Validation schema for the video form
 const VideoSchema = Yup.object().shape({

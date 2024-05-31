@@ -5,7 +5,7 @@ const Winningsuser = () => {
   const [winnings, setWinnings] = useState([]);
 
   useEffect(() => {
-    fetch('https://wincrics.com:8443/winnings')
+    fetch('http://194.238.18.76:3000/winnings')
       .then(response => response.json())
       .then(data => setWinnings(data))
       .catch(error => console.error('Error fetching data:', error));

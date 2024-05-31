@@ -15,8 +15,8 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 
 const ForgotPassword = () => {
-  const OTP_API_URL = "https://wincrics.com:8443/otpemail";
-  const UPDATE_PASSWORD_API_URL = "https://wincrics.com:8443/updatepassword";
+  const OTP_API_URL = "http://194.238.18.76:3000/otpemail";
+  const UPDATE_PASSWORD_API_URL = "http://194.238.18.76:3000/updatepassword";
 
   const [openOtpModal, setOpenOtpModal] = useState(false);
   const [loading, setLoading] = useState(false);

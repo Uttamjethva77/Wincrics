@@ -21,7 +21,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 
 // Define a base URL for the API
-const API_URL = "https://wincrics.com:8443/packagess";
+const API_URL = "http://194.238.18.76:3000/packagess";
 
 // Validation schema for the package form
 const PackageSchema = Yup.object().shape({

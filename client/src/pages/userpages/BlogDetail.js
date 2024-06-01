@@ -9,7 +9,8 @@ import {
   Paper,
   Card,
   CardContent,
-  CardHeader
+  CardHeader,
+  CircularProgress,
 } from '@mui/material';
 import { useParams } from 'react-router-dom';
 
@@ -39,7 +40,7 @@ const BlogDetail = () => {
   }, [id]);
 
   if (loading) {
-    return <Typography>Loading...</Typography>;
+    return <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}><CircularProgress /></Box>;
   }
 
   if (error) {
@@ -47,44 +48,49 @@ const BlogDetail = () => {
   }
 
   return (
-    <Box sx={{ padding: '2rem', backgroundColor: '#e0f7fa' }}>
+    <Box sx={{ padding: '1rem', backgroundColor: '#e0f7fa' }}>
       <Paper sx={{ marginBottom: '3rem', backgroundColor: '#ffffff', borderRadius: '16px', boxShadow: '0px 3px 10px rgba(0,0,0,0.1)' }}>
-        <Box sx={{ padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-          <Typography variant="h2" gutterBottom style={{ color: '#00796b' }}>{blogData.title}</Typography>
-          <Typography variant="subtitle1" color="textSecondary" gutterBottom>
-            {blogData.date} | {blogData.time} | {blogData.venue}
+        <Box sx={{ padding: '1rem', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+          <Typography variant="h2" gutterBottom sx={{ color: '#00796b', textAlign: 'center' }}>
+            {blogData.title}
+          </Typography>
+          <Typography variant="subtitle1" color="textSecondary" gutterBottom sx={{ textAlign: 'center' }}>
+            {new Date(blogData.date).toLocaleDateString()} | {blogData.time} | {blogData.venue}
           </Typography>
           <Divider />
-          <Typography variant="body1" paragraph style={{ color: '#004d40',height:"auto",wordWrap:"break-word" }}>{blogData.description}</Typography>
-          <Grid container spacing={3}>
-            {blogData.images?.map((image, idx) => (
-              <Grid item xs={12} md={6} lg={4} key={idx}>
-                <Box sx={{ textAlign: 'center' }}>
-                  <Avatar
-                    src={image}
-                    alt={`Blog Image ${idx + 1}`}
-                    sx={{
-                      width: '100%',
-                      height: 'auto',
-                      borderRadius: '16px',
-                      border: '4px solid #00796b',
-                      marginBottom: '1rem',
-                    }}
-                  />
-                </Box>
-              </Grid>
-            ))}
-          </Grid>
+          
+          {blogData.blogimage && (
+            <Box sx={{ textAlign: 'center' }}>
+              <Avatar
+                src={blogData.blogimage}
+                alt={`Blog Image`}
+                sx={{
+                  width: '100%',
+                  height: 'auto',
+                  borderRadius: '16px',
+                  border: '4px solid #00796b',
+                  marginBottom: '2rem',
+                }}
+              />
+            </Box>
+          )}
+          <Typography variant="body1" paragraph sx={{ color: '#004d40', wordWrap: 'break-word' }}>
+            {blogData.description}
+          </Typography>
           <Divider />
-          <Typography variant="h6" gutterBottom style={{ color: '#00796b' }}>Captains:</Typography>
-          <Box sx={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+          <Typography variant="h6" gutterBottom sx={{ color: '#00796b' }}>
+            Captains:
+          </Typography>
+          <Box sx={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
             {blogData.captain?.map((captain, index) => (
               <Chip key={index} label={captain} color="primary" />
             ))}
           </Box>
           <Divider />
-          <Typography variant="h6" gutterBottom style={{ color: '#00796b' }}>Vice Captains:</Typography>
-          <Box sx={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+          <Typography variant="h6" gutterBottom sx={{ color: '#00796b' }}>
+            Vice Captains:
+          </Typography>
+          <Box sx={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
             {blogData.vice_captain?.map((vc, index) => (
               <Chip key={index} label={vc} color="secondary" />
             ))}
@@ -100,13 +106,13 @@ const BlogDetail = () => {
               'Squad Team 2': blogData.squad_team2,
             }[title];
             return (
-              <Card key={idx} sx={{ backgroundColor: '#e8f5e9', marginBottom: '1rem' }}>
+              <Card key={idx} sx={{ backgroundColor: '#e8f5e9', marginBottom: '2rem' }}>
                 <CardHeader title={title} sx={{ backgroundColor: '#a5d6a7', color: '#004d40' }} />
                 <CardContent>
-                  <Box sx={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+                  <Box sx={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'center' }}>
                     {playerData?.map((player, index) => (
-                      <Box key={index} sx={{ textAlign: 'center' }}>
-                        <Avatar sx={{ bgcolor: '#00796b', margin: '0 auto' }}>{player.charAt(0)}</Avatar>
+                      <Box key={index} sx={{ textAlign: 'center', margin: '0.5rem' }}>
+                        <Avatar sx={{ bgcolor: '#00796b', margin: '0 auto', mb: 1 }}>{player.charAt(0)}</Avatar>
                         <Typography variant="caption">{player}</Typography>
                       </Box>
                     ))}
@@ -116,14 +122,18 @@ const BlogDetail = () => {
             );
           })}
           <Divider />
-          <Typography variant="h6" gutterBottom style={{ color: '#00796b' }}>Tags:</Typography>
-          <Box sx={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+          <Typography variant="h6" gutterBottom sx={{ color: '#00796b' }}>
+            Tags:
+          </Typography>
+          <Box sx={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
             {blogData.tags?.map((tag, index) => (
               <Chip key={index} label={tag} variant="outlined" />
             ))}
           </Box>
           <Divider />
-          <Typography variant="body2" color="textSecondary" style={{ color: '#00695c' }}>{blogData.match_news}</Typography>
+          <Typography variant="body2" color="textSecondary" sx={{ color: '#00695c' }}>
+            {blogData.match_news}
+          </Typography>
         </Box>
       </Paper>
     </Box>

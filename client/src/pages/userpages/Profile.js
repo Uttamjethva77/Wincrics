@@ -138,11 +138,11 @@ const Profile = () => {
             ) : (
               <Box mt={2}>
                 <Typography variant="body2" sx={{ color: 'red' }}>Email not verified</Typography>
-                {!otpVerified && otpEntry && otpEntry.otp_number !== 'verify' && (
+                {/* {!otpVerified && otpEntry && otpEntry.otp_number !== 'verify' && (
                   <Box mt={2}>
                     <Button variant="contained" color="primary" onClick={handleVerifyOTP}>Verify Email</Button>
                   </Box>
-                )}
+                )} */}
               </Box>
             )}
           </CardContent>

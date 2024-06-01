@@ -21,13 +21,13 @@ import MenuIcon from "@mui/icons-material/Menu";
 import HomeIcon from "@mui/icons-material/Home";
 import PriceCheckIcon from "@mui/icons-material/PriceCheck";
 import ArticleIcon from "@mui/icons-material/Article";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import SettingsIcon from "@mui/icons-material/Settings";
-import DashboardIcon from "@mui/icons-material/Dashboard";
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import PersonIcon from "@mui/icons-material/Person";
 import SportsCricketIcon from '@mui/icons-material/SportsCricket';
+import OndemandVideoIcon from '@mui/icons-material/OndemandVideo';
+import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
 
 const Header = () => {
   const [drawerOpen, setDrawerOpen] = React.useState(false);
@@ -37,12 +37,12 @@ const Header = () => {
   const [logout,setlogout] = useState()
 
   const menuItems = [
-    //   { text: "Home", icon: <HomeIcon />, route: "/home" },
-    { text: "Packages", icon: <PriceCheckIcon />, route: "/packages" },
-    { text: "Prime Teams", icon: <SportsCricketIcon />, route: "/prime-teams" },
-    { text: "Blogs", icon: <ArticleIcon />, route: "/blog" },
-    { text: "Videos", icon: <AccountCircleIcon />, route: "/videos" },
-    { text: "Winnings", icon: <SettingsIcon />, route: "/winnings" },
+      { text: "Home", icon: <HomeIcon sx={{fontSize:"28px"}} />, route: "/" },
+    { text: "Packages", icon: <PriceCheckIcon sx={{fontSize:"28px"}} />, route: "/packages" },
+    { text: "Prime Teams", icon: <SportsCricketIcon sx={{fontSize:"28px"}} />, route: "/prime-teams" },
+    { text: "Blogs", icon: <ArticleIcon sx={{fontSize:"28px"}} />, route: "/blog" },
+    { text: "Videos", icon: <OndemandVideoIcon sx={{fontSize:"28px"}}/>, route: "/videos" },
+    { text: "Winnings", icon: <CurrencyExchangeIcon sx={{fontSize:"28px"}}/>, route: "/winnings" },
     // { text: "Dashboard", icon: <DashboardIcon />, route: "/dashboard" },
   ];
 
@@ -68,11 +68,7 @@ const Header = () => {
   };
 
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [auth, setAuth] = React.useState(true);
 
-  const handleChange = (event) => {
-    setAuth(event.target.checked);
-  };
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -91,7 +87,7 @@ const Header = () => {
     >
       <List>
         {menuItems.map((item, index) => (
-          <ListItem key={item.text} disablePadding>
+          <ListItem key={index} disablePadding>
             <ListItemButton onClick={() => handleMenuClick(item.route)}>
               <ListItemIcon>{item.icon}</ListItemIcon>
               <ListItemText primary={item.text} />
@@ -155,9 +151,9 @@ const Header = () => {
               WINCRICS
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-              {menuItems.map((item) => (
+              {menuItems.map((item,index) => (
                 <Button
-                  key={item.text}
+                  key={index}
                   sx={{ my: 2, color: "white", display: "block" }}
                   onClick={() => handleMenuClick(item.route)}
                 >
@@ -218,7 +214,8 @@ const Header = () => {
                     localStorage.clear("userdata");
                     navigate("/");
                     setAnchorEl(null);
-                    setlogout(null)
+                    setlogout(null);
+                    window.location.reload();
                   }}
                 >
                   Logout

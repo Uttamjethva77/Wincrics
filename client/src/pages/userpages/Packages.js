@@ -1,11 +1,17 @@
+
+
 import React, { useEffect, useState } from 'react';
 import { Container, Grid, Card, CardContent, Typography, Box, List, ListItem, ListItemText, Button } from '@mui/material';
 
-import CheckIcon from '@mui/icons-material/Check'; // Import the CheckIcon from Material-UI icons
-import RupeeIcon from '@mui/icons-material/AttachMoney'; // Import the RupeeIcon from Material-UI icons
+import CheckIcon from '@mui/icons-material/Check';
+import RupeeIcon from '@mui/icons-material/AttachMoney';
 
-const Userpackages = () => {
+import RazorpayButton from '../../components/RazorpayButton';
+import { useNavigate } from 'react-router-dom';
+
+const Userpackages = ({ limit }) => {
   const [packages, setPackages] = useState([]);
+  var data = localStorage.getItem("userdata")
 
   useEffect(() => {
     fetch('http://localhost:3000/packagess')
@@ -14,13 +20,17 @@ const Userpackages = () => {
       .catch(error => console.error('Error fetching data:', error));
   }, []);
 
+  const displayedPackages = limit ? packages.slice(0, limit) : packages;
+
+  const navigate = useNavigate()
+
   return (
     <Container sx={{ py: 8 }} maxWidth="md">
       <Typography variant="h4" component="h1" gutterBottom color="primary">
         Membership Packages
       </Typography>
       <Grid container spacing={4}>
-        {packages.map((pkg) => (
+        {displayedPackages.map((pkg) => (
           <Grid item key={pkg.id} xs={12} sm={6}>
             <Card 
               sx={{ 
@@ -81,13 +91,19 @@ const Userpackages = () => {
                           boxShadow: '3px 2px 5px rgba(0, 0, 0, 0.1)',
                         }}
                       >
-                        <CheckIcon sx={{ color: '#000000', marginRight: '8px' }} /> {/* Check icon */}
+                        <CheckIcon sx={{ color: '#000000', marginRight: '8px' }} />
                         <ListItemText primary={benefit} sx={{ fontWeight: 'bold', color: '#000000' }} />
                       </ListItem>
                     ))}
                   </List>
                 </Box>
-                <Button 
+
+               { !data && 
+                (
+                  <Button 
+                  onClick={()=>{
+                    navigate("/login")
+                  }}
                   variant="contained" 
                   sx={{ 
                     mt: 2, 
@@ -102,12 +118,17 @@ const Userpackages = () => {
                 >
                   Purchase
                 </Button>
+                )
+               }
+                <RazorpayButton paymentButtonId={`pl_OHRBQsSTmGY6pr`}></RazorpayButton>
               </CardContent>
             </Card>
           </Grid>
         ))}
       </Grid>
+      
     </Container>
+    
   );
 };
 

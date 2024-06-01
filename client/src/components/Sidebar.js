@@ -14,6 +14,7 @@ import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import ContactPageIcon from '@mui/icons-material/ContactPage';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 
+
 const sidebarItems = [
   { text: 'analyitics', icon: <InfoIcon sx={{ fontSize: "30px" }} />, path: '/admin/analytics' },
   { text: 'Video', icon: <VideoLibraryIcon sx={{ fontSize: "30px" }} />, path: '/admin/videos' },

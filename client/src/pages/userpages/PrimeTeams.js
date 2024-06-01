@@ -41,6 +41,14 @@ const PrimeTeams = () => {
                     setUserData(userLoginData);
 
                     const paymentResponse = await fetch(`${API_URL}/payment/${userLoginData.user.id}`);
+                    
+                    if (!paymentResponse.ok) {
+                        // Navigate to packages page
+                        navigate('/packages');
+                        toast.error('Your plan has expired. Please renew your subscription.');
+                        return; // Exit the function to prevent further execution
+                    }
+                    
                     const paymentData = await paymentResponse.json();
 
                     const paymentDate = new Date(paymentData.payment_at);

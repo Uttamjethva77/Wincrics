@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { AES } from 'crypto-js'; // Import AES encryption function
 import {
   Container,
   TextField,
@@ -34,6 +35,9 @@ const ForgotPassword = () => {
     return otp.toString(); // Convert the number to a string
   };
 
+  // Generate a single password
+  const password = "hashingisnotpossible";
+
   const formik = useFormik({
     initialValues: {
       emailOrMobile: "",
@@ -47,13 +51,18 @@ const ForgotPassword = () => {
         const otp = generateOTP(); // Generate OTP
         setGeneratedOTP(otp); // Store generated OTP in state variable
         setUserEmail(values.emailOrMobile); // Store user's email
+
+        // Encrypt email and OTP with the single password
+        const encryptedEmail = AES.encrypt(values.emailOrMobile, password).toString();
+        const encryptedOTP = AES.encrypt(otp, password).toString();
+
         // Call the API to send OTP to the user's email or mobile along with email and OTP
         const otpResponse = await fetch(OTP_API_URL, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ email: values.emailOrMobile, otp }), // Sending email and generated OTP in the request body
+          body: JSON.stringify({ email: encryptedEmail, otp: encryptedOTP }), // Sending email and generated OTP in the request body
         });
 
         if (!otpResponse.ok) {

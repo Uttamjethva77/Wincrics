@@ -28,7 +28,7 @@ const SubscribeModal = () => {
 
   const handleSubmit = async () => {
     try {
-      const response = await fetch('http://localhost:3000/notification', {
+      const response = await fetch('https://wincrics.com:8443/notification', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

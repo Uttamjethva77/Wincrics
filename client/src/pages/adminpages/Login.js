@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router';
 
 const theme = createTheme();
 
-const API_URL = "http://localhost:3000/adminlogin";
+const API_URL = "https://wincrics.com:8443/adminlogin";
 
 function Login() {
 

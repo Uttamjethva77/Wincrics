@@ -22,7 +22,7 @@ import * as Yup from "yup";
 import MuiAlert from "@mui/material/Alert";
 
 // Define a base URL for the API
-const API_URL = "http://localhost:3000/winnings";
+const API_URL = "https://wincrics.com:8443/winnings";
 
 // Validation schema for the winnings form
 const WinningsSchema = Yup.object().shape({

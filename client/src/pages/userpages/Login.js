@@ -61,6 +61,7 @@ const Loginuser = () => {
         setSnackbarSeverity("success");
         setOpenSnackbar(true);
         navigate("/")
+        window.location.reload();
       } catch (error) {
         console.error("Error:", error);
         setErrors({ api: error.message });

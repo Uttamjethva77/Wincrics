@@ -52,14 +52,15 @@ function App() {
             <Route path="contactus" element={<ContactUs />} />
           </Route>
 
+          
+          <Route path="/" element={<ResponsiveAppBar></ResponsiveAppBar>}>
+          <Route path="/" element={<Mainhome></Mainhome>}></Route>
           <Route path="/register" element={<Register></Register>}></Route>
           <Route path="login" element={<Loginuser></Loginuser>}></Route>
           <Route
             path="forgetpassword"
             element={<ForgotPassword></ForgotPassword>}
           ></Route>
-          <Route path="/" element={<ResponsiveAppBar></ResponsiveAppBar>}>
-          <Route path="/" element={<Mainhome></Mainhome>}></Route>
             <Route path="/videos" element={<Videos></Videos>}></Route>
             <Route path="/blog" element={<Blog></Blog>}></Route>
             <Route path="/blogdata/:id" element={<BlogDetail />} />

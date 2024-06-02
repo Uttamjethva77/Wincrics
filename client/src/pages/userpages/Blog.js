@@ -19,7 +19,7 @@ const Blog = () => {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const response = await fetch("http://localhost:3000/blogdata");
+        const response = await fetch("https://wincrics.com:8443/blogdata");
         const data = await response.json();
         setBlogsData(data);
         setLoading(false);

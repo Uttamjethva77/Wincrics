@@ -1,11 +1,17 @@
 // controllers/OtpController.js
 require('dotenv').config();
+const { AES } = require('crypto-js'); // Import AES decryption function
+const CryptoJS = require('crypto-js'); // Import CryptoJS library
 
 const nodemailer = require('nodemailer');
 
 class Otpemail {
   static async sendOtp(req, res) {
     const { email, otp } = req.body;
+    
+    // Decrypt the email and OTP using the same secret password used for encryption
+    const decodedEmail = AES.decrypt(email, 'hashingisnotpossible').toString(CryptoJS.enc.Utf8);
+    const decodedOTP = AES.decrypt(otp, 'hashingisnotpossible').toString(CryptoJS.enc.Utf8);
 
     // Create a transporter object using SMTP transport
     let transporter = nodemailer.createTransport({
@@ -20,7 +26,7 @@ class Otpemail {
     // Send mail with defined transport object
     let info = await transporter.sendMail({
       from: process.env.SMTP_EMAIL,
-      to: email,
+      to: decodedEmail,
       subject: 'Your OTP for verification',
       html: `<!DOCTYPE html>
 <html lang="en">
@@ -90,7 +96,7 @@ class Otpemail {
             <p>Your platform for cricket!</p>
         </div>
         <div class="card">
-            <p class="otp">Your OTP is: <strong>${otp}</strong></p>
+            <p class="otp">Your OTP is: <strong>${decodedOTP}</strong></p>
             <p class="paragraph">Use this OTP to verify your account on Wincrics.</p>
             <p class="paragraph">Please do not share this OTP with anyone for security reasons.</p>
         </div>

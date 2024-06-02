@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { AES } from 'crypto-js';
 import {
   Container,
   TextField,
@@ -15,6 +16,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
+
+
 const Register = () => {
   const REGISTER_API_URL = "https://wincrics.com:8443/users";
   const OTP_API_URL = "https://wincrics.com:8443/otpemail";
@@ -30,6 +33,7 @@ const Register = () => {
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [snackbarSeverity, setSnackbarSeverity] = useState("success");
   const [load, setload] = useState(false);
+  const passworduse = "hashingisnotpossible";
 
   const navigate = useNavigate();
 
@@ -73,13 +77,18 @@ const Register = () => {
         console.log("User registered:", registeredUser);
 
         const otp = Math.floor(100000 + Math.random() * 900000).toString();
+        const encryptedEmail = AES.encrypt(values.email, passworduse).toString();
+        const encryptedOTP = AES.encrypt(otp, passworduse).toString();
 
         const otpResponse = await fetch(OTP_API_URL, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ email: values.email, otp }),
+          body: JSON.stringify({ 
+            email: encryptedEmail, 
+            otp: encryptedOTP 
+          }),
         });
 
         if (!otpResponse.ok) {

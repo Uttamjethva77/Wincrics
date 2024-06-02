@@ -20,6 +20,7 @@ const Mainhome = () => {
   return (
     <Box>
       <SubscribeModal></SubscribeModal>
+      <Blog></Blog>
       <Userpackages limit={2}></Userpackages>
       <Box
         sx={{
@@ -91,19 +92,82 @@ const Mainhome = () => {
       <Videos limit={5}></Videos>
       <Winningsuser></Winningsuser>
       <Box sx={{ px: 2 }}>
-        <Accordion>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1-content"
-            id="panel1-header"
-          >
-            Accordion 1
-          </AccordionSummary>
-          <AccordionDetails>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget.
-          </AccordionDetails>
-        </Accordion>
+        <WhatsAppIcon />
+      </IconButton>
+      <Typography variant="body1" color={"red"}>WhatsApp</Typography>
+      <IconButton
+        sx={{
+          bgcolor: "green", // Background color for Telegram icon
+          borderRadius: '50px', // Border radius to create capsule shape
+          color: '#fff', // Icon color
+        }}
+        aria-label="Telegram"
+      >
+        <TelegramIcon />
+      </IconButton>
+      <Typography variant="body1" color={"red"}>Telegram</Typography>
+    </Box>
+      <Videos limit={5}></Videos>
+      <Winningsuser></Winningsuser>
+      <Box sx={{px:2}}>
+      <Accordion>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1-content"
+          id="panel1-header"
+        >
+         DREAM11 PRIME MEMBERSHIP | Rules and Tips to follow:
+        </AccordionSummary>
+        <AccordionDetails>
+        If you have Investment and Backup then only join our prime services.
+Join only the contest after we provide the teams.
+We will provide 6 Grand League teams.
+Players must join all teams in mega contests.
+The final team will come in Prime teams section before 10-20 minutes of the match deadline or after the lineup is announced.
+        </AccordionDetails>
+      </Accordion>
+      <Accordion>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1-content"
+          id="panel1-header"
+        >
+          How to avoid losses in Dream11? DREAM11 PRIME MEMBERSHIP
+        </AccordionSummary>
+        <AccordionDetails>
+        Always join contests which we will guide you after you join our membership plan.
+Never join any contest in advance unless we ask you to join.
+Don’t invest your full money in one contest itself.
+Play a minimum of 5 to 6 contests in small league contests.
+Divide your budget for small league and grand league in equal amounts always.
+Don’t play high amount contests after getting profits from one match. Invest equally in all matches.
+Always keep a backup budget with you to recover your losses if any.
+        </AccordionDetails>
+      </Accordion>
+      <Accordion>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1-content"
+          id="panel1-header"
+        >
+          What is the secret to win Dream11?
+        </AccordionSummary>
+        <AccordionDetails>
+        One effective strategy to earn money from Dream11 is to play small leagues instead of grand leagues. You will face less opposition and have a better chance of winning by playing in smaller leagues. Select players with a higher chance of scoring points and a history of consistency.
+        </AccordionDetails>
+      </Accordion>
+      <Accordion>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1-content"
+          id="panel1-header"
+        >
+          Is it possible to win GL in Dream11?
+        </AccordionSummary>
+        <AccordionDetails>
+        It is indeed not easy to win a grand league in Dream11, as you are competing against numerous other skilled players, and you need to have a deep understanding of the sport, the teams, and the players to make informed decisions.
+        </AccordionDetails>
+      </Accordion>
       </Box>
     </Box>
   );

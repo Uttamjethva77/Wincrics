@@ -88,9 +88,6 @@ const Mainhome = () => {
           </Typography>
         </Box>
       </Box>
-      <Blog></Blog>
-      <Videos limit={5}></Videos>
-      <Winningsuser></Winningsuser>
       <Videos limit={5}></Videos>
       <Winningsuser></Winningsuser>
       <Box sx={{px:2}}>

@@ -91,22 +91,6 @@ const Mainhome = () => {
       <Blog></Blog>
       <Videos limit={5}></Videos>
       <Winningsuser></Winningsuser>
-      <Box sx={{ px: 2 }}>
-        <WhatsAppIcon />
-      </IconButton>
-      <Typography variant="body1" color={"red"}>WhatsApp</Typography>
-      <IconButton
-        sx={{
-          bgcolor: "green", // Background color for Telegram icon
-          borderRadius: '50px', // Border radius to create capsule shape
-          color: '#fff', // Icon color
-        }}
-        aria-label="Telegram"
-      >
-        <TelegramIcon />
-      </IconButton>
-      <Typography variant="body1" color={"red"}>Telegram</Typography>
-    </Box>
       <Videos limit={5}></Videos>
       <Winningsuser></Winningsuser>
       <Box sx={{px:2}}>

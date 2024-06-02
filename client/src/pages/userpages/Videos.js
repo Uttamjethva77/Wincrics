@@ -53,7 +53,7 @@ const Videos = ({ limit }) => {
   const displayedVideos = limit ? videos.slice(0, limit) : videos;
 
   return (
-    <Container sx={{ mt: 4 }}>
+    <Container sx={{ mt: 4 ,backgroundColor:"#DEDFE7"}}>
       <Grid container spacing={4} sx={{ mt: 10 }}>
         {displayedVideos.map((video) => (
           <Grid item xs={12} sm={6} md={4} key={video.link}>

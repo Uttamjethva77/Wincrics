@@ -25,7 +25,7 @@ const Userpackages = ({ limit }) => {
   const navigate = useNavigate()
 
   return (
-    <Container sx={{ py: 8 }} maxWidth="md">
+    <Container sx={{ py: 8 ,backgroundColor:"#DEDFE7"}} maxWidth="md">
       <Typography variant="h4" component="h1" gutterBottom color="primary">
         Membership Packages
       </Typography>
@@ -37,8 +37,8 @@ const Userpackages = ({ limit }) => {
                 height: '100%', 
                 display: 'flex', 
                 flexDirection: 'column', 
-                backgroundColor: '#f5f5f5', 
-                border: '1px solid #5f5f5f',
+                backgroundColor: '#EDEEF2', 
+                border: '0px solid #5f5f5f',
                 boxShadow: 10,
                 transition: 'transform 0.3s, box-shadow 0.3s',
                 '&:hover': {
@@ -120,7 +120,7 @@ const Userpackages = ({ limit }) => {
                 </Button>
                 )
                }
-                <RazorpayButton paymentButtonId={`pl_OHRBQsSTmGY6pr`}></RazorpayButton>
+                <RazorpayButton paymentButtonId={`pl_OHoBj2Bro3hIfC`}></RazorpayButton>
               </CardContent>
             </Card>
           </Grid>

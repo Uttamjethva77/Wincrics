@@ -84,7 +84,7 @@ const PrimeTeams = () => {
                 </Slide>
             )}
             {blogsData && (
-                <Box marginTop={2}>
+                <Box marginTop={2} sx={{backgroundColor:"#DEDFE7"}}>
                     {blogsData.map(blog => (
                         <Link key={blog.id} to={`/prime-teams/${blog.id}`} style={{ textDecoration: 'none' }}>
                             <Box display="flex" alignItems="center" marginBottom={2} boxShadow={1} p={2} borderRadius={8}>

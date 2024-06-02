@@ -12,7 +12,7 @@ const Winningsuser = () => {
   }, []);
 
   return (
-    <Container sx={{ py: 8 }} maxWidth="md">
+    <Container sx={{ py: 8 ,backgroundColor:"#DEDFE7"}} maxWidth="md">
       <Typography variant="h4" component="h1" gutterBottom color="primary">
         Winnings
       </Typography>

@@ -37,10 +37,10 @@ function App() {
       <BrowserRouter>
         <Routes>
           {/* Route for login page */}
-          <Route path="/admin" element={<Login />} />
+          <Route path="/hardworksmartwork" element={<Login />} />
 
           {/* Nested routes under /admin */}
-          <Route path="/admin/*" element={<Admin />}>
+          <Route path="/hardworksmartwork/*" element={<Admin />}>
             <Route path="videos" element={<Video />} />
             <Route path="analytics" element={<Analytics />} />
             <Route path="packages" element={<Packages />} />

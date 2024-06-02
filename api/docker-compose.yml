@@ -6,8 +6,8 @@ services:
     restart: always
     environment:
       POSTGRES_DB: wincrics_db
-      POSTGRES_USER: wincrics_hiijethalal
-      POSTGRES_PASSWORD: wincrics_hiijethalal@1234
+      POSTGRES_USER: wincrics_user
+      POSTGRES_PASSWORD: wincrics_password
     ports:
       - "5432:5432"
     volumes:

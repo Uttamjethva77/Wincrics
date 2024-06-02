@@ -9,7 +9,7 @@ const PrimeTeamDetails = () => {
   useEffect(() => {
     const fetchBlogDetails = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/blogs/${id}`); // Make API call to get blog details
+        const response = await fetch(`https://wincrics.com:8443/blogs/${id}`); // Make API call to get blog details
         const data = await response.json();
         setBlogDetails(data); // Store the blog details in state
       } catch (error) {

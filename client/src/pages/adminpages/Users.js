@@ -23,7 +23,7 @@ const Users = () => {
   const fetchData = async () => {
     setLoading(true);
     try {
-      let url = `http://localhost:3000/${section}`;
+      let url = `https://wincrics.com:8443/${section}`;
       const response = await fetch(url, {
         headers: {
           'Authorization': `${tok}`

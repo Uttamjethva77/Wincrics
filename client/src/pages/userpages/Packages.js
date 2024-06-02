@@ -14,7 +14,7 @@ const Userpackages = ({ limit }) => {
   var data = localStorage.getItem("userdata")
 
   useEffect(() => {
-    fetch('http://localhost:3000/packagess')
+    fetch('https://wincrics.com:8443/packagess')
       .then(response => response.json())
       .then(data => setPackages(data))
       .catch(error => console.error('Error fetching data:', error));

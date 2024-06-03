@@ -54,7 +54,7 @@ const Blog = () => {
   return (
     <Box sx={{ padding: { xs: "1rem", sm: "2rem", md: "3rem" }, backgroundColor: "#DEDFE7" }}>
       <Typography variant="h4" gutterBottom sx={{ color: "#004d40", textAlign: "center", marginBottom: "2rem" }}>
-        Blog Previews
+        Blogs
       </Typography>
       <Grid container spacing={3}>
         {blogsData.map((data) => (

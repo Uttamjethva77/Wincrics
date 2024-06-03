@@ -20,7 +20,7 @@ const Mainhome = () => {
   return (
     <Box>
       <SubscribeModal></SubscribeModal>
-      <Blog></Blog>
+      <Blog limit={3}></Blog>
       <Userpackages limit={2}></Userpackages>
       <Box
         sx={{
@@ -88,8 +88,8 @@ const Mainhome = () => {
           </Typography>
         </Box>
       </Box>
-      <Videos limit={5}></Videos>
-      <Winningsuser></Winningsuser>
+      <Videos limit={3}></Videos>
+      <Winningsuser limit={5}></Winningsuser>
       <Box sx={{px:2}}>
       <Accordion>
         <AccordionSummary

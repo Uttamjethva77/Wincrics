@@ -1,22 +1,22 @@
 const express = require('express');
 const UserController = require('../controller/userscontroller');
 const { logAnalytics } = require('../middelwear/analytics')
-const { authenticateToken } = require('../middelwear/authenticate');
+const { authenticateTokenn } = require('../middelwear/auth');
 const usersroute = express.Router();
 usersroute.use(logAnalytics);
 // Create a new user
-usersroute.post('/',UserController.create);
+usersroute.post('/',authenticateTokenn,UserController.create);
 
 // Get all users
-usersroute.get('/',UserController.getAll);
+usersroute.get('/',authenticateTokenn,UserController.getAll);
 
 // Get a user by ID
-usersroute.get('/:id',UserController.getById);
+usersroute.get('/:id',authenticateTokenn,UserController.getById);
 
 // Update a user by ID
-usersroute.put('/:id',UserController.update);
+usersroute.put('/:id',authenticateTokenn,UserController.update);
 
 // Delete a user by ID
-usersroute.delete('/:id',UserController.delete);
+usersroute.delete('/:id',authenticateTokenn,UserController.delete);
 
 module.exports = usersroute;

@@ -44,7 +44,7 @@ const Mainhome = () => {
           }}
         >
           <IconButton
-            href="https://twitter.com/wincrics"
+            href="https://wa.me/message/7OQSR6TSZX6KD1"
             sx={{
               bgcolor: "green", // Background color for WhatsApp icon
               borderRadius: "50px", // Border radius to create capsule shape
@@ -56,7 +56,7 @@ const Mainhome = () => {
             <WhatsAppIcon />
           </IconButton>
           <Typography variant="body1" color={"red"} sx={{ cursor: "pointer" }}>
-            <Link to={"https://twitter.com/wincrics"}>
+            <Link to={"https://wa.me/message/7OQSR6TSZX6KD1"}>
               Need Prime ? Click to chat Now
             </Link>
           </Typography>
@@ -70,7 +70,7 @@ const Mainhome = () => {
           }}
         >
           <IconButton
-            href="https://twitter.com/wincrics"
+            href="https://t.me/wincrics"
             sx={{
               bgcolor: "#1976d2", // Background color for Telegram icon
               borderRadius: "50px", // Border radius to create capsule shape
@@ -82,7 +82,7 @@ const Mainhome = () => {
             <TelegramIcon />
           </IconButton>
           <Typography variant="body1" color={"red"} sx={{ cursor: "pointer" }}>
-            <Link to={"https://twitter.com/wincrics"}>
+            <Link to={"https://t.me/wincrics"}>
               Need Latest News ? Join NOw{" "}
             </Link>
           </Typography>

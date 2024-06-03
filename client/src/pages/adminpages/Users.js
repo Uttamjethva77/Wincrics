@@ -26,7 +26,8 @@ const Users = () => {
       let url = `https://wincrics.com:8443/${section}`;
       const response = await fetch(url, {
         headers: {
-          'Authorization': `${tok}`
+          'Authorization': `${tok}`,
+          'userauth': `eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ`
         }
       });
       const result = await response.json();

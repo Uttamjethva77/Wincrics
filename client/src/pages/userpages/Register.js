@@ -64,6 +64,7 @@ const Register = () => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            'userauth': `eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ`
           },
           body: JSON.stringify(values),
         });
@@ -96,6 +97,7 @@ const Register = () => {
             method: "DELETE",
             headers: {
               "Content-Type": "application/json",
+              'userauth': `eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ`
             },
           });
 
@@ -125,6 +127,7 @@ const Register = () => {
             method: "DELETE",
             headers: {
               "Content-Type": "application/json",
+              'userauth': `eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ`
             },
           });
 

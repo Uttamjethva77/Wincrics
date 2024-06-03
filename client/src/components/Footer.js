@@ -126,7 +126,7 @@ const Footer = () => {
                 }}
               >
                 <IconButton
-                  href="https://www.facebook.com"
+                  href="https://www.instagram.com/win_crics/"
                   target="_blank"
                   color="inherit"
                 >
@@ -140,7 +140,7 @@ const Footer = () => {
                   <InstagramIcon />
                 </IconButton>
                 <IconButton
-                  href="https://youtube.com/@uttamjethva4659?si=8UUwb9_Ito6S_Yst"
+                  href="https://youtube.com/@wincrics?si=lMK1dMO-vszNTDv-"
                   target="_blank"
                   color="inherit"
                 >
@@ -154,14 +154,14 @@ const Footer = () => {
                   <XIcon />
                 </IconButton>
                 <IconButton
-                  href="https://twitter.com/wincrics"
+                  href="https://t.me/wincrics"
                   target="_blank"
                   color="inherit"
                 >
                   <TelegramIcon />
                 </IconButton>
                 <IconButton
-                  href="https://twitter.com/wincrics"
+                  href="https://wa.me/message/7OQSR6TSZX6KD1"
                   target="_blank"
                   color="inherit"
                 >
